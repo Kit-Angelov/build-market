@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/styles.css' %}" />
+    <title>B-MARKET</title>
+</head>
+<body>
+    <div class="main">
+        <div class="left_part">
+            <div class="logo">
+                <p>B-MARKET</p>
+            </div>
+            <div class="main_menu">
+                <div class="main_menu_elem {% if active == 'products'%}active{% endif %}"><a href="/"><p>Товары</p></a></div>
+                <div class="main_menu_elem {% if active == 'stores'%}active{% endif %}"><a href="/stores"><p>Магазины</p></a></div>
+                <div class="main_menu_elem {% if active == 'services'%}active{% endif %}"><a href="/services"><p>Услуги</p></a></div>
+                <div class="main_menu_elem {% if active == 'contractors'%}active{% endif %}"><a href="/contractors"><p>Подрядчики</p></a></div>
+            </div>
+        </div>
+        <div class="right_part">
+            <div class="top_pane">
+                <input placeholder="что вы ищете?">
+                <div class="city"><p>Воронеж</p></div>
+            </div>
+            <div class="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

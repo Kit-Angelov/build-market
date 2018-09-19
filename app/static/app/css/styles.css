@@ -1,0 +1,129 @@
+body {
+    margin:0;
+    padding:0;
+}
+.main {
+    width: 100vw;
+    height: 100vh;
+    background-color: red;
+    margin:0;
+    padding:0;
+}
+.left_part {
+    width: 200px;
+    height: 100%;
+    background: brown;
+    float: left;
+}
+.logo {
+    width: 100%;
+    height: 40px;
+    background-color: blue;
+    text-align: center;
+}
+.logo p {
+    padding: 10px;
+    font-size: 16pt;
+    margin: 0;
+    color: white;
+}
+.main_menu{
+    width: 100%;
+    height: auto;
+}
+.main_menu_elem {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+.main_menu_elem a {
+    text-decoration: none;
+}
+.main_menu_elem.active{
+    background-color: green;
+}
+.main_menu_elem:hover{
+    background-color: gray;
+}
+.main_menu_elem p {
+    margin: 0;
+    color: white;
+    font-size: 16pt;
+    padding: 10px;
+}
+.right_part{
+    width: calc(100% - 200px);
+    height: 100%;
+    float: left;
+}
+.top_pane {
+    width: 100%;
+    height: 40px;
+    float: left;
+}
+.top_pane input {
+    width: calc(100% - 150px);
+    float: left;
+    height: 100%;
+    padding: 0;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    font-size: 14pt;
+}
+.city{
+    float: left;
+    height: 100%;
+    width: 150px;
+    text-align: center;
+    background-color: blue;
+}
+.city p {
+    margin:0;
+    color: white;
+    padding:10px;
+    font-size: 14pt;
+}
+
+.content{
+    width: 100%;
+    height: calc(100% - 40px);
+    float: left;
+    background-color: black;
+    overflow-y: auto;
+}
+.products_wrapper{
+    width: 100%;
+    height: 100%;
+}
+.products_grid{
+    padding: 20px;
+    background-color: ghostwhite;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-auto-rows: 400px;
+}
+.product{
+    background-color: red;
+}
+.product_image{
+    width: 100%;
+    height: 50%;
+    float: left;
+    background-color: green;
+}
+.product_image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.product_text{
+    width: 100%;
+    height: 50%;
+    float: left;
+}
