@@ -1,4 +1,4 @@
 db.sqlite3
 media/*
-.idea
+.idea/*
 static/*
