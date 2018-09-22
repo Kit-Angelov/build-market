@@ -1,3 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Notable');
+
+@font-face {
+    font-family: logo;
+    src: url("/static/app/fonts/logo.ttf");
+}
+@font-face {
+    font-family: logo2;
+    src: url("/static/app/fonts/logo2.ttf");
+}
+
+
+p, a, h1, h2, h3, h4, span, b, input, button, div {
+    font-family: 'Roboto', sans-serif;
+}
+
 body {
     margin:0;
     padding:0;
@@ -5,7 +23,7 @@ body {
 .main {
     width: 100vw;
     height: 100vh;
-    background-color: red;
+    background-color: white;
     margin:0;
     padding:0;
 }
@@ -18,14 +36,15 @@ body {
 .logo {
     width: 100%;
     height: 40px;
-    background-color: blue;
+    background-color: #233b60;
     text-align: center;
 }
 .logo p {
-    padding: 10px;
-    font-size: 16pt;
+    padding: 5px;
+    font-size: 22pt;
     margin: 0;
     color: white;
+    font-family: 'logo', sans-serif;
 }
 .main_menu{
     width: 100%;
@@ -50,17 +69,20 @@ body {
     margin: 0;
     color: white;
     font-size: 16pt;
-    padding: 10px;
+    padding: 5px;
 }
 .right_part{
+    position: relative;
     width: calc(100% - 200px);
     height: 100%;
     float: left;
 }
 .top_pane {
-    width: 100%;
+    width: calc(100% - 200px);
     height: 40px;
-    float: left;
+    position: fixed;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
+    z-index: 9;
 }
 .top_pane input {
     width: calc(100% - 150px);
@@ -70,8 +92,8 @@ body {
     border: none;
     outline: none;
     padding-left: 20px;
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     font-size: 14pt;
 }
@@ -85,16 +107,34 @@ body {
 .city p {
     margin:0;
     color: white;
-    padding:10px;
+    padding: 7px;
     font-size: 14pt;
 }
 
+.paginator_wrapp{
+    position: fixed;
+    width: calc(100% - 200px);
+    height: 40px;
+    bottom: 0;
+    z-index: 99;
+}
+
+.paginator {
+    width: 300px;
+    height: 100%;
+    margin: auto;
+    background-color: white;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.1);
+}
+
 .content{
-    width: 100%;
+    width: calc(100% - 200px);
     height: calc(100% - 40px);
-    float: left;
-    background-color: black;
+    position: fixed;
+    top: 40px;
+    background-color: #e5e5e5;
     overflow-y: auto;
+    z-index: 8;
 }
 .products_wrapper{
     width: 100%;
@@ -102,20 +142,29 @@ body {
 }
 .products_grid{
     padding: 20px;
-    background-color: ghostwhite;
+    padding-bottom: 60px;
+    background-color: #e5e5e5;
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
     grid-auto-rows: 400px;
 }
 .product{
-    background-color: red;
+    cursor: pointer;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+.product:hover{
+    box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, 0.1);
 }
 .product_image{
     width: 100%;
     height: 50%;
     float: left;
-    background-color: green;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(1px, 1fr));
+    grid-template-rows: 1;
+    background-color: white;
 }
 .product_image img{
     width: 100%;
@@ -125,5 +174,16 @@ body {
 .product_text{
     width: 100%;
     height: 50%;
+    padding: 10px 15px;
     float: left;
+}
+
+.product_name {
+    color: black;
+    font-size: 14pt;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin:0;
+    padding:0;
 }

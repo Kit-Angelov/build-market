@@ -1,16 +1,38 @@
 {% extends 'app/base.html' %}
 {% load static %}
 {% block content %}
-    <div class="products_wrapper">
+    <div class="products_wrapper" id="product">
         <div class="products_grid">
+            {% for product in products %}
             <div class="product">
                 <div class="product_image">
-                    <img src="{% static 'app/img/molotok.jpg'%}"/>
+                    {% for photo in product.productphoto_set.all %}
+                    <div class="product_photo_col">{{photo.photo.url}}</div>
+                    {% endfor %}
+                    <img class="" :src="current_photo"/>
                 </div>
                 <div class="product_text">
-
+                    <p class="product_name">{{ product.name }}</p>
+                    <p class="product_price">{{ product.price }} руб.</p>
+                    <p class="product_store">{{ product.store.name }}</p>
+                    <p class="product_site_link">{{ product.site_link }}</p>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
+
+<script>
+new Vue({
+  delimiters: ['${', '}'],
+  el: '#product',
+  data: {
+    current_photo: '',
+  },
+  created () {
+    console.log(document.getElementsByClassName('product_photo_col'));
+    this.current_photo = document.getElementsByClassName('product_photo_col')[0].textContent;
+  }
+});
+</script>
 {% endblock %}

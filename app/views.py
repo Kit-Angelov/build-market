@@ -1,8 +1,19 @@
 from django.shortcuts import render
+from . import models
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def products(request):
-    context = {'active': 'products'}
+    product_list = models.Product.objects.all()
+    paginator = Paginator(product_list, 12)
+    page = request.GET.get('page')
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+    context = {'products': products}
     return render(request, 'app/products.html', context=context)
 
 

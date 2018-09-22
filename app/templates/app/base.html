@@ -3,14 +3,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'app/css/styles.css' %}" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
     <title>B-MARKET</title>
 </head>
 <body>
     <div class="main">
         <div class="left_part">
             <div class="logo">
-                <p>B-MARKET</p>
+                <p>B&#183;MARKET</p>
             </div>
             <div class="main_menu">
                 <div class="main_menu_elem {% if active == 'products'%}active{% endif %}"><a href="/"><p>Товары</p></a></div>
@@ -27,6 +30,12 @@
             <div class="content">
                 {% block content %}
                 {% endblock %}
+                <div class="paginator_wrapp">
+                    <div class="paginator">
+                        {% block paginator %}
+                        {% endblock %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
