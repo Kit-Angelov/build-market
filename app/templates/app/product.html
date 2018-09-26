@@ -1,0 +1,74 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+<div class="product-wrap detail-wrap" id="product-detail">
+    <div class="product-detail-image-wrap">
+        <div class="product_photo_hover_grid">
+            {% for photo in product.productphoto_set.all %}
+            <div class="product_photo_col" v-on:mouseover="imageMouseOver('{{photo.photo.url}}')"></div>
+            {% endfor %}
+        </div>
+        <img :src="current_photo || '{{product.productphoto_set.all.0.photo.url}}'">
+    </div>
+    <div class="product-detail-info-wrap">
+        <div class="product-detail-name">
+            <p>{{ product.name }}</p>
+        </div>
+        <div class="product-detail-addition-button-wrap">
+            <div class="product-detail-site-link">
+                <img src="{% static 'app/img/redirect.svg' %}">
+            </div>
+        </div>
+        <div class="product-detail-price">
+            <p>{{ product.price }} руб.</p>
+        </div>
+        <div class="product-detail-uses">
+            <p class="product-detail-uses-header">применения:</p>
+            <div class="product-detail-uses-item-wrap">
+                {% for use in product.uses.all %}
+                <p class="product-detail-uses-item">{{ use.text }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="product-detail-feature-wrap">
+        <div class="product-detail-features">
+            <p class="product-detail-features-header">характеристики:</p>
+            <table class="product-detail-feature-table">
+                {% for feature in product.features.all %}
+                <tr>
+                    <td><p>{{ feature.title | lower }}</p></td>
+                    <td><p>&nbsp;:&nbsp;</p></td>
+                    <td><p>{{ feature.text | lower }}</p></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="product-detail-store-wrap">
+        <div class="product-detail-store-content">
+            <div class="product-detail-store-title-wrap">
+            </div>
+            <div class="product-detail-store-address-wrap"></div>
+            <div class="product-detail-store-phone-wrap"></div>
+            <div class="product-detail-store-worktime-wrap"></div>
+            <div class="product-detail-store-site-wrap"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+new Vue({
+  delimiters: ['${', '}'],
+  el: '#product-detail',
+  data: {
+    current_photo: null,
+  },
+  methods: {
+    imageMouseOver (imageUrl) {
+        this.current_photo = imageUrl;
+    }
+  }
+});
+</script>
+{% endblock %}

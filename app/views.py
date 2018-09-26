@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, Http404
 from . import models
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -13,8 +13,19 @@ def products(request):
         products = paginator.page(1)
     except EmptyPage:
         products = paginator.page(paginator.num_pages)
-    context = {'products': products}
+    context = {'products': products,
+               'active': 'products'}
     return render(request, 'app/products.html', context=context)
+
+
+def product(request, pk):
+    if request.method == 'GET':
+        try:
+            product = models.Product.objects.get(id=pk)
+        except:
+            raise Http404("Product does not exist")
+        context = {'product': product}
+        return render(request, 'app/product.html', context=context)
 
 
 def stores(request):

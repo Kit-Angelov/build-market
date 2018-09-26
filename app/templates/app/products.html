@@ -5,17 +5,31 @@
         <div class="products_grid">
             {% for product in products %}
             <div class="product">
+                <a class="product-link" href="/product/{{product.id}}">
                 <div class="product_image">
-                    {% for photo in product.productphoto_set.all %}
-                    <div class="product_photo_col">{{photo.photo.url}}</div>
-                    {% endfor %}
-                    <img class="" :src="current_photo"/>
+                    <div class="product_photo_hover_grid">
+                        {% for photo in product.productphoto_set.all %}
+                        <div class="product_photo_col" v-on:mouseover="imageMouseOver('{{photo.photo.url}}', '{{forloop.parentloop.counter}}')"></div>
+                        {% endfor %}
+                    </div>
+                    <img class="product_image_front" :src="current_photo['{{forloop.counter}}'] || '{{product.productphoto_set.all.0.photo.url}}'"/>
                 </div>
+                </a>
                 <div class="product_text">
-                    <p class="product_name">{{ product.name }}</p>
-                    <p class="product_price">{{ product.price }} руб.</p>
-                    <p class="product_store">{{ product.store.name }}</p>
-                    <p class="product_site_link">{{ product.site_link }}</p>
+                    <a class="product-link" href="/product/{{product.id}}">
+                    <div class="product_main_info">
+                        <p class="product_name">{{ product.name }}</p>
+                        <p class="product_price">{{ product.price }} руб.</p>
+                    </div>
+                    </a>
+                    <div class="product_store_wrap">
+                        <p class="product_store">{{ product.store.name }}</p>
+                    </div>
+                    <a title="посмотреть на сайте магазина" target="_blank" href="{{ product.site_link }}">
+                    <div class="product_site_link_wrap">
+                            <img class="product_site_link" src="{% static 'app/img/redirect.svg' %}">
+                    </div>
+                    </a>
                 </div>
             </div>
             {% endfor %}
@@ -27,12 +41,55 @@ new Vue({
   delimiters: ['${', '}'],
   el: '#product',
   data: {
-    current_photo: '',
+    current_photo: {},
   },
-  created () {
-    console.log(document.getElementsByClassName('product_photo_col'));
-    this.current_photo = document.getElementsByClassName('product_photo_col')[0].textContent;
+  methods: {
+    getProductPhoto(index, imageUrl){
+        if (this.current_photo[index] == undefined) {
+            return imageUrl;
+        } else {
+            return this.current_photo[index];
+        }
+    },
+    imageMouseOver (imageUrl, index) {
+        Vue.set(this.current_photo, index, imageUrl);
+    }
   }
 });
 </script>
+{% endblock %}
+{% block paginator %}
+
+    {% if products.has_previous %}
+    <a href="?page=1">
+    <div class="product_paginator_first paginator_first paginator_elem">
+        <img src="{% static 'app/img/paginator-first.svg' %}">
+    </div>
+    </a>
+    <a href="?page={{ products.previous_page_number }}">
+    <div class="product_paginator_prev paginator_prev paginator_elem">
+        <img src="{% static 'app/img/paginator-prev.svg' %}">
+    </div>
+    </a>
+    {% endif %}
+    {% if products.paginator.num_pages > 1 %}
+    <div class="product_paginator_current paginator_current">
+        <p>{{ products.number }} из {{ products.paginator.num_pages }}</p>
+    </div>
+    {% endif %}
+
+    {% if products.has_next %}
+    <a href="?page={{ products.next_page_number }}">
+    <div class="product_paginator_next paginator_next paginator_elem">
+        <img src="{% static 'app/img/paginator-next.svg' %}">
+    </div>
+    </a>
+    <a href="?page={{ products.paginator.num_pages }}">
+    <div class="product_paginator_last paginator_last paginator_elem">
+        <img src="{% static 'app/img/paginator-last.svg' %}">
+    </div>
+    </a>
+    {% endif %}
+
+
 {% endblock %}

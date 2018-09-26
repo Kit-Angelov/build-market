@@ -5,6 +5,7 @@ from django.conf import settings
 app_name = 'app'
 urlpatterns = [
     path('', views.products),
+    path('product/<pk>', views.product),
     path('stores', views.stores),
     path('services', views.services),
     path('contractors', views.contractors),

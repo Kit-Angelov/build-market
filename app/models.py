@@ -61,6 +61,7 @@ class Product(models.Model):
     store = models.ForeignKey(Store, blank=True, null=True, on_delete=models.CASCADE)
     features = models.ManyToManyField(ProductFeature, blank=True, null=True)
     uses = models.ManyToManyField(ProductUse, blank=True, null=True)
+    actual = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
