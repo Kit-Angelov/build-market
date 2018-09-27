@@ -1,5 +1,6 @@
 {% extends 'app/base.html' %}
 {% load static %}
+{% load work_days %}
 {% block content %}
 <div class="product-wrap detail-wrap" id="product-detail">
     <div class="product-detail-image-wrap">
@@ -23,7 +24,7 @@
             <p>{{ product.price }} руб.</p>
         </div>
         <div class="product-detail-uses">
-            <p class="product-detail-uses-header">применения:</p>
+            <!--<p class="product-detail-uses-header">применения:</p>-->
             <div class="product-detail-uses-item-wrap">
                 {% for use in product.uses.all %}
                 <p class="product-detail-uses-item">{{ use.text }}</p>
@@ -48,11 +49,24 @@
     <div class="product-detail-store-wrap">
         <div class="product-detail-store-content">
             <div class="product-detail-store-title-wrap">
+                <p>{{ product.store.name }}</p>
             </div>
-            <div class="product-detail-store-address-wrap"></div>
-            <div class="product-detail-store-phone-wrap"></div>
-            <div class="product-detail-store-worktime-wrap"></div>
-            <div class="product-detail-store-site-wrap"></div>
+            <div class="product-detail-store-address-wrap">
+                <p>{{ product.store.address }}</p>
+            </div>
+            <div class="product-detail-store-phone-wrap">
+                <p>{{ product.store.phone }}</p>
+            </div>
+            <div class="product-detail-store-worktime-wrap">
+                <p>Время работы: {{ product.store.work_time_start | time:"H:i" }} - {{ product.store.work_time_end | time:"H:i" }} | {{ product.store.work_days | days_format }}</p>
+            </div>
+            <div class="product-detail-store-site-wrap">
+                <div class="product-detail-store-site-button">
+                    <a target="_blank" href="{{ product.store.site }}">
+                    <p>веб-сайт</p>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
