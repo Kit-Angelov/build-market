@@ -1,11 +1,61 @@
-<!DOCTYPE html>
 {% extends 'app/base.html' %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% load static %}
+{% load work_days %}
+{% block content %}
+    <div class="stores_wrapper" id="stores">
+        <div class="stores_grid">
+            {% for store in stores %}
+            <div class="store">
+                <a class="store-link" href="/stores/{{store.id}}">
+                <div class="stores_image_wrap">
+                    <div class="stores_images_grid">
+                        {% for photo in store.storephoto_set.all %}
+                        <div class="store_photo_col" v-on:mouseover="imageMouseOver('{{photo.photo.url}}', '{{forloop.parentloop.counter}}')"></div>
+                        {% endfor %}
+                    </div>
+                    <img class="store_image_front" :src="current_photo['{{forloop.counter}}'] || '{{store.storephoto_set.all.0.photo.url}}'"/>
+                </div>
+                </a>
+                <div class="store_text">
+                    <a class="store-link" href="/stores/{{store.id}}">
+                    <div class="store_name">
+                        <p>{{ store.name }}</p>
+                    </div>
+                    <div class="store_address">
+                        <p>{{ store.address }}</p>
+                    </div>
+                    <div class="store_phone">
+                        <p>{{ store.phone }}</p>
+                    </div>
+                    <div class="store-worktime-wrap">
+                        <p>{{ store.work_time_start | time:"H:i" }} - {{ store.work_time_end | time:"H:i" }} | {{ store.work_days | days_format }}</p>
+                    </div>
+                    <div class="store-site-wrap">
+                        <div class="store-site-button">
+                            <a target="_blank" href="{{ store.site }}">
+                            <p>веб-сайт</p>
+                            </a>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 
-</body>
-</html>
+<script>
+new Vue({
+  delimiters: ['${', '}'],
+  el: '#stores',
+  data: {
+    current_photo: {},
+  },
+  methods: {
+    imageMouseOver (imageUrl, index) {
+        Vue.set(this.current_photo, index, imageUrl);
+    }
+  }
+});
+</script>
+{% endblock %}

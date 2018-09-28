@@ -70,6 +70,55 @@ class ProductPhotoRelativeAdmin(admin.StackedInline):
     )
 
 
+class ProductUsesRelativeAdmin(admin.StackedInline):
+    model = models.ProductUse
+
+
+class ProductFeaturesRelativeAdmin(admin.StackedInline):
+    model = models.ProductFeature
+
+
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
-    inlines = [ProductPhotoRelativeAdmin,]
+    inlines = [ProductPhotoRelativeAdmin, ProductUsesRelativeAdmin, ProductFeaturesRelativeAdmin]
+
+
+@admin.register(models.ContractorPhoto)
+class ContractorPhotoAdmin(admin.ModelAdmin):
+
+    fields = ["contractor", "photo", "photo_view"]
+    readonly_fields = ('photo_view',)
+
+    def photo_view(self, obj):
+        return mark_safe('<img src="{url}" width="{width}" height={height} />'.format(
+            url = obj.photo.url,
+            width=200,
+            height=150,
+            )
+    )
+
+
+admin.site.register(models.ContractorSpecialty)
+
+
+class ContractorPhotoRelativeAdmin(admin.StackedInline):
+    model = models.ContractorPhoto
+
+    readonly_fields = ('photo_view',)
+
+    def photo_view(self, obj):
+        return mark_safe('<img src="{url}" width="{width}" height={height} />'.format(
+            url=obj.photo.url,
+            width=200,
+            height=150,
+        )
+    )
+
+
+class ContractorSpecialtyRelativeAdmin(admin.StackedInline):
+    model = models.ContractorSpecialty
+
+
+@admin.register(models.Contractor)
+class ContractorAdmin(admin.ModelAdmin):
+    inlines = [ContractorSpecialtyRelativeAdmin, ContractorPhotoRelativeAdmin]

@@ -1,0 +1,66 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load work_days %}
+{% block content %}
+<div class="store-detail-wrap" id="store-detail">
+    <div class="store-detail-info-wrap">
+        <div class="store-detail-info-image-wrap">
+            <div class="store-detail-info-image-grid">
+                {% for photo in store.storephoto_set.all %}
+                <div class="product_photo_col" v-on:mouseover="imageMouseOver('{{photo.photo.url}}')"></div>
+                {% endfor %}
+            </div>
+            <img class="store-detail-info-image-front" :src="current_photo || '{{store.storephoto_set.all.0.photo.url}}'">
+        </div>
+        <div class="store-detail-info-content-wrap">
+            <div class="store-detail-info-content-name">
+                <p>{{ store.name }}</p>
+            </div>
+            <div class="store-detail-info-content-address">
+                <p>{{ store.address }}</p>
+            </div>
+            <div class="store-detail-info-content-phone">
+                <p>{{ store.phone }}</p>
+            </div>
+            <div class="store-detail-info-content-worktime">
+                <p>{{ store.work_time_start | time:"H:i" }} - {{ store.work_time_end | time:"H:i" }} | {{ store.work_days | days_format }}</p>
+            </div>
+            <div class="store-detail-info-content-sitelink-wrap">
+                <div class="store-detail-info-content-sitelink-button">
+                    <p class="store-detail-info-content-sitelink-button-text">веб-сайт</p>
+                </div>
+            </div>
+            <div class="store-detail-info-content-description">
+                <p>{{ store.description }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="store-map-wrap">
+        <div class="store-map" id="store-map"></div>
+    </div>
+</div>
+
+<script>
+new Vue({
+  delimiters: ['${', '}'],
+  el: '#store-detail',
+  data: {
+    current_photo: null,
+  },
+  methods: {
+    imageMouseOver (imageUrl) {
+        this.current_photo = imageUrl;
+    }
+  }
+});
+</script>
+<script>
+function initMap() {
+    var map = new google.maps.Map(document.getElementById('store-map'), {
+        center: {lat: 51.7139853 , lng: 39.1518986},
+        zoom: 15
+    });
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjXLyo0MPbU6mkNHF2u8S5u3Xcep2o_hk&callback=initMap"async defer></script>
+{% endblock %}

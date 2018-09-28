@@ -1,11 +1,11 @@
 {% extends 'app/base.html' %}
 {% load static %}
 {% block content %}
-    <div class="products_wrapper" id="product">
+    <div class="products_wrapper" id="products">
         <div class="products_grid">
             {% for product in products %}
             <div class="product">
-                <a class="product-link" href="/product/{{product.id}}">
+                <a class="product-link" href="/products/{{product.id}}">
                 <div class="product_image">
                     <div class="product_photo_hover_grid">
                         {% for photo in product.productphoto_set.all %}
@@ -16,18 +16,22 @@
                 </div>
                 </a>
                 <div class="product_text">
-                    <a class="product-link" href="/product/{{product.id}}">
+                    <a class="product-link" href="/products/{{product.id}}">
                     <div class="product_main_info">
-                        <p class="product_name">{{ product.name }}</p>
-                        <p class="product_price">{{ product.price }} руб.</p>
-                    </div>
-                    </a>
-                    <div class="product_store_wrap">
-                        <p class="product_store">{{ product.store.name }}</p>
-                    </div>
-                    <a title="посмотреть на сайте магазина" target="_blank" href="{{ product.site_link }}">
-                    <div class="product_site_link_wrap">
-                            <img class="product_site_link" src="{% static 'app/img/redirect.svg' %}">
+                        <div class="product_name">
+                            <p>{{ product.name }}</p>
+                        </div>
+                        <div class="product_price">
+                            <p>{{ product.price }} руб.</p>
+                        </div>
+                        <div class="product_store">
+                            <p>{{ product.store.name }}</p>
+                        </div>
+                        <div class="product_site_link_wrap">
+                            <div class="product_site_link_button">
+                                <p class="product_site_link_button_text">веб-сайт</p>
+                            </div>
+                        </div>
                     </div>
                     </a>
                 </div>
@@ -39,18 +43,11 @@
 <script>
 new Vue({
   delimiters: ['${', '}'],
-  el: '#product',
+  el: '#products',
   data: {
     current_photo: {},
   },
   methods: {
-    getProductPhoto(index, imageUrl){
-        if (this.current_photo[index] == undefined) {
-            return imageUrl;
-        } else {
-            return this.current_photo[index];
-        }
-    },
     imageMouseOver (imageUrl, index) {
         Vue.set(this.current_photo, index, imageUrl);
     }

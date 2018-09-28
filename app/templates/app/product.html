@@ -15,16 +15,15 @@
         <div class="product-detail-name">
             <p>{{ product.name }}</p>
         </div>
-        <div class="product-detail-addition-button-wrap">
-            <div class="product-detail-site-link">
-                <img src="{% static 'app/img/redirect.svg' %}">
+        <div class="product-detail-price">
+            <p class="product-detail-price-text">{{ product.price }} руб.</p>
+            <div class="product-detail-site-wrap">
+                <div class="product-detail-site-link-button">
+                    <p class="product-detail-site-link-button-text">веб-сайт</p>
+                </div>
             </div>
         </div>
-        <div class="product-detail-price">
-            <p>{{ product.price }} руб.</p>
-        </div>
         <div class="product-detail-uses">
-            <!--<p class="product-detail-uses-header">применения:</p>-->
             <div class="product-detail-uses-item-wrap">
                 {% for use in product.uses.all %}
                 <p class="product-detail-uses-item">{{ use.text }}</p>
@@ -58,7 +57,7 @@
                 <p>{{ product.store.phone }}</p>
             </div>
             <div class="product-detail-store-worktime-wrap">
-                <p>Время работы: {{ product.store.work_time_start | time:"H:i" }} - {{ product.store.work_time_end | time:"H:i" }} | {{ product.store.work_days | days_format }}</p>
+                <p>время работы: {{ product.store.work_time_start | time:"H:i" }} - {{ product.store.work_time_end | time:"H:i" }} | {{ product.store.work_days | days_format }}</p>
             </div>
             <div class="product-detail-store-site-wrap">
                 <div class="product-detail-store-site-button">

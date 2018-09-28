@@ -218,14 +218,11 @@ body {
     display: grid;
     grid-gap: 20px;
     grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-    grid-auto-rows: 315px;
+    grid-auto-rows: 350px;
 }
 .product{
     cursor: pointer;
     background-color: white;
-}
-.product:hover .product_main_info p{
-    color: black;
 }
 .product-link:hover {
     text-decoration: none;
@@ -262,20 +259,25 @@ body {
 }
 .product_text{
     width: 100%;
-    height: 115px;
+    height: 145px;
     float: left;
     background-color: #ECF0F1;
 }
 
 .product_main_info{
     width: 100%;
-    height: 75px;
+    height: 100%;
     text-align: left;
     background-color: white;
     padding: 10px 15px;
 }
 
 .product_name {
+    width; 100%;
+    height: 30px
+}
+
+.product_name p {
     color: #333333;
     font-size: 14pt;
     white-space: nowrap;
@@ -283,8 +285,15 @@ body {
     text-overflow: ellipsis;
     margin:0;
     padding:0;
+    float: left;
 }
-.product_price{
+
+.product_price {
+    width: 100%;
+    height: 30px;
+}
+
+.product_price p{
     color: #333333;
     font-size: 14pt;
     white-space: nowrap;
@@ -292,9 +301,15 @@ body {
     text-overflow: ellipsis;
     margin:0;
     product:0;
+    float: left;
 }
 
-.product_store_wrap{
+.product_store_wrap {
+    width: 100%;
+    height: 30px;
+}
+
+.product_store_wrap p{
     float: left;
     width: calc(100% - 40px);
     height: 40px;
@@ -302,10 +317,16 @@ body {
     background-color: white;
     padding: 7px;
     padding-left: 15px;
+    float: left;
 }
 
-.product_store{
-    color: #3498DB;
+.product_store {
+    width: 100%;
+    height: 30px;
+}
+
+.product_store p{
+    color: #333333;
     font-size: 14pt;
     white-space: nowrap;
     overflow: hidden;
@@ -314,29 +335,31 @@ body {
     product:0;
     float: left;
 }
-.product_store:hover{
-    text-decoration: underline;
-    text-decoration-color: #3498DB;
-}
+
 .product_site_link_wrap{
-    float: left;
-    width: 35px;
-    height: 35px;
-    text-align:center;
-    padding: 6px;
-    background-color: white;
-    margin-left: 5px;
-    margin-top: 5px;
-}
-.product_site_link_wrap:hover{
-    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
-}
-.product_site_link {
     width: 100%;
-    height: 100%;
+    height: 30px;
+    float: left;
 }
-.product_site_link a {
-    text-decoration: none;
+.product_site_link_button {
+    width: 100px;
+    height: 30px;
+    float: left;
+    background-color: #ECF0F1;
+    text-align: center;
+}
+.product_site_link_button_text {
+    color: #333333;
+    font-size: 12pt;
+    margin:0;
+    margin-top: 3px;
+}
+
+.product_site_link_button:hover {
+    background-color: #3498DB;
+}
+
+.product_site_link_button:hover .product_site_link_button_text{
     color: white;
 }
 
@@ -384,36 +407,6 @@ body {
     color: #333333;
 }
 
-.product-detail-addition-button-wrap{
-    width: 45px;
-    height: 45px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    cursor: pointer;
-    background-color: #ECF0F1;
-}
-
-.product-detail-site-link{
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 8px;
-    cursor: pointer;
-    background-color: white;
-}
-
-.product-detail-site-link:hover{
-    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
-}
-
-.product-detail-site-link img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
 
 .product-detail-price {
     height: 30px;
@@ -423,13 +416,43 @@ body {
     float: left;
 }
 
-.product-detail-price p {
+.product-detail-price-text {
     margin: 0;
     font-size: 16pt;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: #333333;
+    float: left;
+}
+
+.product-detail-site-wrap {
+    width: 100px;
+    height: 30px;
+    margin-right: 20px;
+    float: right;
+}
+
+.product-detail-site-link-button{
+    width: 100%;
+    height: 100%;
+    background-color: #ECF0F1;
+    text-align: center;
+    cursor: pointer;
+}
+
+.product-detail-site-link-button:hover {
+    background-color: #3498DB;
+}
+
+.product-detail-site-link-button:hover .product-detail-site-link-button-text {
+    color: white;
+}
+
+.product-detail-site-link-button-text {
+    font-size: 12pt;
+    margin: auto;
+    padding-top: 4px;
 }
 
 .product-detail-uses {
@@ -607,4 +630,458 @@ body {
     margin: 0;
     font-size: 12pt;
     padding-top: 3px;
+}
+
+.stores_wrapper{
+    width: 100%;
+    height: 100%;
+}
+
+.stores_grid{
+    padding: 20px;
+    padding-bottom: 60px;
+    background-color: #ECF0F1;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    grid-auto-rows: 390px;
+}
+.store{
+    cursor: pointer;
+    background-color: white;
+}
+.store:hover .store_main_info p{
+    color: black;
+}
+
+.store_text{
+    width: 100%;
+    height: 190px;
+    float: left;
+    background-color: white;
+    padding: 15px 20px;
+}
+
+.stores_image_wrap {
+    width: 100%;
+    height: 200px;
+    float: left;
+    background-color: white;
+    position: relative;
+}
+.stores_images_grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(1px, 1fr));
+    grid-template-rows: 1;
+    z-index: 1;
+}
+
+.store_image_front{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    object-fit: cover;
+}
+
+.store_name {
+    font-size: 16pt;
+    margin: 0;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.store_name p {
+    color: #333333;
+    margin:0;
+}
+.store_address {
+    font-size: 12pt;
+    margin: 0;
+    width: 100%;
+    height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.store_address p {
+    color: #333333;
+    margin:0;
+}
+.store_phone {
+    font-size: 12pt;
+    margin: 0;
+    width: 100%;
+    height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.store_phone p {
+    color: #333333;
+    margin:0;
+}
+.store-worktime-wrap {
+    font-size: 12pt;
+    width: 100%;
+    height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.store-worktime-wrap p {
+    color: #333333;
+    margin:0;
+}
+.store-site-wrap{
+    width: 100%;
+    height: 30px;
+}
+.store-site-wrap a {
+    text-decoration: none;
+}
+.store-site-button{
+    width: 100px;
+    height: 100%;
+    background-color: #ECF0F1;
+    text-align:center;
+}
+.store-site-button:hover {
+    background-color: #3498DB;
+}
+.store-site-button:hover p{
+    color: white;
+}
+.store-site-button p {
+    color: #333333;
+    margin: 0;
+    font-size: 12pt;
+    padding-top: 3px;
+}
+
+.store-detail-wrap{
+    width: calc(100% - 40px);
+    height: calc(100% - 60px);
+    background-color: #ECF0F1;
+    margin: auto;
+    margin-top: 20px;
+    position: relative;
+}
+
+.store-link:hover {
+    text-decoration: none;
+}
+
+.store-detail-info-wrap {
+    width: calc(50% - 20px);
+    height: 100%;
+    margin-right: 20px;
+    float: left;
+}
+
+.store-detail-info-image-wrap{
+    width: 100%;
+    height: 50%;
+}
+.store-detail-info-image-front{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.store-map-wrap{
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+.store-map {
+    width: 100%;
+    height: 100%;
+}
+
+.store-detail-info-content-wrap{
+    width: 100%;
+    height: 50%;
+    float: left;
+    padding: 15px 15px 15px 20px;
+    background-color: white;
+}
+
+.store-detail-info-content-name {
+    width: 100%;
+    height: 30px;
+}
+
+.store-detail-info-content-name p {
+    color: #333333;
+    font-size: 14pt;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.store-detail-info-content-address {
+    width: 100%;
+    height: 30px;
+}
+
+.store-detail-info-content-address p {
+    color: #333333;
+    font-size: 12pt;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.store-detail-info-content-phone{
+    width: 100%;
+    height: 30px;
+}
+.store-detail-info-content-phone p {
+    color: #333333;
+    font-size: 12pt;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.store-detail-info-content-worktime {
+    width: 100%;
+    height: 30px;
+}
+.store-detail-info-content-worktime p {
+    color: #333333;
+    font-size: 12pt;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.store-detail-info-content-description {
+    width: 100%;
+    height: 90px;
+    overflow-y: auto;
+    margin-top: 10px;
+}
+
+.store-detail-info-content-description::-webkit-scrollbar {
+    width: 10px;
+}
+
+.store-detail-info-content-description::-webkit-scrollbar-track {
+    border: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+.store-detail-info-content-description::-webkit-scrollbar-thumb {
+    background-color: rgba(41, 128, 185, 0.1);
+}
+
+.store-detail-info-content-description p {
+    color: #333333;
+    font-size: 12pt;
+    margin: 0;
+}
+
+.store-detail-info-content-sitelink-wrap {
+    width: 100%;
+    height: 30px;
+}
+.store-detail-info-content-sitelink-button {
+    width: 100px;
+    height: 30px;
+    background-color: #ECF0F1;
+    text-align: center;
+    cursor: pointer;
+}
+
+.store-detail-info-content-sitelink-button-text {
+    color: #333333;
+    font-size: 12pt;
+    padding-top: 4px;
+    margin: 0;
+}
+
+.store-detail-info-content-sitelink-button:hover {
+    background-color: #3498DB;
+}
+
+.store-detail-info-content-sitelink-button:hover .store-detail-info-content-sitelink-button-text {
+    color: white;
+}
+
+.contractors-wrap {
+    width: 100%;
+    height: 100%;
+}
+
+.contractors_grid {
+    padding: 20px;
+    padding-bottom: 60px;
+    background-color: #ECF0F1;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    grid-auto-rows: 350px;
+}
+
+.contractor {
+    background-color: white;
+}
+
+.contractor_image_wrap {
+    width: 100%;
+    height: 200px;
+    float: left;
+    background-color: white;
+    position: relative;
+}
+
+.contractor_images_grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(1px, 1fr));
+    grid-template-rows: 1;
+    z-index: 1;
+}
+
+.contractor_image_front{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    object-fit: cover;
+}
+
+.contractor-info-wrap{
+    width: 100%;
+    height: 150px;
+    padding: 15px 20px;
+    float: left;
+}
+
+.contractor-name-wrap {
+    width: 100%;
+    height: 30px;
+    float: left;
+}
+.contractor-name-wrap p {
+    color: #333333;
+    font-size: 14pt;
+    margin:0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.contractor-phone-wrap {
+    width: 100%;
+    height: 30px;
+    float: left;
+}
+.contractor-phone-wrap p {
+    color: #333333;
+    font-size: 14pt;
+    margin:0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.contractor-specialty-wrap {
+    width: 100%;
+    height: 30px;
+    float: left;
+}
+.contractor-specialty-text {
+    color: #333333;
+    font-size: 12pt;
+    margin:0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    float: left;
+}
+
+.contractor-specialty-counter-wrap {
+    width: auto;
+    height: 30px;
+    float: right;
+    position: relative;
+}
+.contractor-specialty-counter {
+    font-size: 12pt;
+    color: #3498DB;
+    cursor: pointer;
+}
+
+.contractor-specialty-popup {
+    position: absolute;
+    width: auto;
+    height: auto;
+    background-color: white;
+    bottom:30px;
+    right: 10px;
+    padding: 5px 10px;
+    z-index: 99;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+.contractor-specialty-popup p {
+    white-space: nowrap;
+    margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 1px;
+    font-size: 12pt;
+    color: #333333;
+}
+
+.contractor-specialty-popup p:nth-child(2n) {
+    background-color: #ECF0F1;
+}
+
+.contractor-services-wrap {
+    width: 100%;
+    height: 30px;
+    float: left;
+}
+.contractor-services-button {
+    width: 100px;
+    height: 30px;
+    background-color: #ECF0F1;
+    text-align: center;
+    cursor: pointer;
+}
+.contractor-services-button p {
+    color: #333333;
+    padding-top: 3px;
+    font-size: 12pt;
+}
+
+.contractor-services-button:hover {
+    background-color: #3498DB;
+}
+
+.contractor-services-button:hover p {
+    color: white;
 }
