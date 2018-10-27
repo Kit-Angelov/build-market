@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600');
 @import url('https://fonts.googleapis.com/css?family=Notable');
 
 @font-face {
@@ -13,7 +13,8 @@
 
 
 p, a, h1, h2, h3, h4, span, b, input, button, div {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
 }
 
 body {
@@ -30,7 +31,7 @@ body {
 .left_part {
     width: 200px;
     height: 100%;
-    background: #2C3E50;
+    background: rgba(44, 62, 80, 1);
     float: left;
 }
 .logo {
@@ -60,10 +61,13 @@ body {
     text-decoration: none;
 }
 .main_menu_elem.active{
-    background-color: rgba(35, 106, 185, 0.5);
+    background-color: rgba(236, 240, 241, 0.2);
 }
 .main_menu_elem:hover{
-    background-color: rgba(35, 106, 185, 0.2);
+    background-color: rgba(236, 240, 241, 0.1);
+}
+.main_menu_elem.active:hover{
+    background-color: rgba(236, 240, 241, 0.2);
 }
 .main_menu_elem p {
     margin: 0;
@@ -79,9 +83,10 @@ body {
 }
 .top_pane {
     width: calc(100% - 200px);
-    height: 40px;
+    height: 41px;
     position: fixed;
-    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
+    // box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #ECF0F1;
     z-index: 9;
 }
 .top_pane input {
@@ -126,7 +131,6 @@ body {
     background-color: white;
 }
 .paginator_elem {
-    padding: 8px;
     background-color: white;
     cursor: pointer;
 }
@@ -134,8 +138,10 @@ body {
     background-color: #d1d1d1;
 }
 .paginator_elem img{
-    width: 100%;
-    height: 100%;
+    margin-top: 12px;
+    margin-left: 12px;
+    width: 16px;
+    height: auto;
 }
 .paginator_first {
     position: absolute;
@@ -165,10 +171,10 @@ body {
     background-color: white;
 }
 .paginator_current p {
-    font-size: 14pt;
-    color: #333333;
+    font-size: 12pt;
+    color: black;
     margin: 0;
-    margin-top: 6px;
+    margin-top: 8px;
 }
 .paginator_next{
     position: absolute;
@@ -197,19 +203,25 @@ body {
     z-index: 8;
 }
 .content::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 .content::-webkit-scrollbar-track {
-    border: 1px solid rgba(128, 128, 128, 0.5);
+    border: 0px;
 }
 
 .content::-webkit-scrollbar-thumb {
-    background-color: rgba(41, 128, 185, 0.1);
+    background-color: rgba(44, 62, 80, 0.4);
+}
+.products_main_wrap {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
+    grid-template-rows: 1;
 }
 .products_wrapper{
     width: 100%;
     height: 100%;
+    float: left;
 }
 .products_grid{
     padding: 20px;
@@ -217,19 +229,20 @@ body {
     background-color: #ECF0F1;
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-    grid-auto-rows: 350px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-auto-rows: 420px;
 }
 .product{
-    cursor: pointer;
     background-color: white;
+}
+.product:hover{
 }
 .product-link:hover {
     text-decoration: none;
 }
 .product_image{
     width: 100%;
-    height: 200px;
+    height: 280px;
     float: left;
     background-color: white;
     position: relative;
@@ -259,16 +272,10 @@ body {
 }
 .product_text{
     width: 100%;
-    height: 145px;
+    height: 140px;
     float: left;
-    background-color: #ECF0F1;
-}
-
-.product_main_info{
-    width: 100%;
-    height: 100%;
-    text-align: left;
     background-color: white;
+    position: relative;
     padding: 10px 15px;
 }
 
@@ -278,7 +285,7 @@ body {
 }
 
 .product_name p {
-    color: #333333;
+    color: black;
     font-size: 14pt;
     white-space: nowrap;
     overflow: hidden;
@@ -294,7 +301,7 @@ body {
 }
 
 .product_price p{
-    color: #333333;
+    color: black;
     font-size: 14pt;
     white-space: nowrap;
     overflow: hidden;
@@ -326,7 +333,7 @@ body {
 }
 
 .product_store p{
-    color: #333333;
+    color: black;
     font-size: 14pt;
     white-space: nowrap;
     overflow: hidden;
@@ -334,6 +341,11 @@ body {
     margin:0;
     product:0;
     float: left;
+    cursor: pointer;
+}
+
+.product_store p:hover {
+    text-decoration: underline;
 }
 
 .product_site_link_wrap{
@@ -349,7 +361,7 @@ body {
     text-align: center;
 }
 .product_site_link_button_text {
-    color: #333333;
+    color: black;
     font-size: 12pt;
     margin:0;
     margin-top: 3px;
@@ -370,266 +382,6 @@ body {
     margin: auto;
     margin-top: 20px;
     position: relative;
-}
-
-.product-detail-image-wrap{
-    width: 60%;
-    height: 60%;
-    float: left;
-    position: relative;
-}
-
-.product-detail-image-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.product-detail-info-wrap{
-    float: left;
-    width: 40%;
-    height: 60%;
-    padding: 15px 0px 15px 20px;
-}
-
-.product-detail-name {
-    height: 30px;
-    width: calc(100% - 40px);
-    float: left;
-    float: left;
-}
-.product-detail-name p {
-    margin: 0;
-    font-size: 16pt;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: #333333;
-}
-
-
-.product-detail-price {
-    height: 30px;
-    width: 100%;
-    float: left;
-    margin-top: 10px;
-    float: left;
-}
-
-.product-detail-price-text {
-    margin: 0;
-    font-size: 16pt;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: #333333;
-    float: left;
-}
-
-.product-detail-site-wrap {
-    width: 100px;
-    height: 30px;
-    margin-right: 20px;
-    float: right;
-}
-
-.product-detail-site-link-button{
-    width: 100%;
-    height: 100%;
-    background-color: #ECF0F1;
-    text-align: center;
-    cursor: pointer;
-}
-
-.product-detail-site-link-button:hover {
-    background-color: #3498DB;
-}
-
-.product-detail-site-link-button:hover .product-detail-site-link-button-text {
-    color: white;
-}
-
-.product-detail-site-link-button-text {
-    font-size: 12pt;
-    margin: auto;
-    padding-top: 4px;
-}
-
-.product-detail-uses {
-    width: 100%;
-    height: calc(100% - 10px - 30px - 10px - 10px - 10px - 10px);
-    float: left;
-    margin-top: 10px;
-}
-
-.product-detail-uses-header{
-    color: #333333;
-    font-size: 14pt;
-    margin: 0;
-    margin-bottom: 5px;
-}
-
-.product-detail-uses-item-wrap{
-    width: 100%;
-    padding-right: 20px;
-    height: 100%;
-    overflow-y: auto;
-}
-.product-detail-uses-item-wrap::-webkit-scrollbar {
-    width: 10px;
-}
-
-.product-detail-uses-item-wrap::-webkit-scrollbar-track {
-    border: 1px solid rgba(128, 128, 128, 0.2);
-}
-
-.product-detail-uses-item-wrap::-webkit-scrollbar-thumb {
-    background-color: rgba(41, 128, 185, 0.1);
-}
-.product-detail-uses-item:nth-child(2n){
-    background-color: #ECF0F1;
-}
-.product-detail-uses-item{
-    color: #333333;
-    font-size: 12pt;
-    margin: 0;
-    padding-left: 5px;
-}
-
-.product-detail-feature-wrap{
-    float: left;
-    width: 60%;
-    height: 40%;
-    background-color: white;
-    padding: 10px 20px;
-}
-
-.product-detail-features {
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    float: left;
-    overflow-y: auto;
-    text-align: left;
-}
-
-.product-detail-features-header {
-    font-size: 16pt;
-    color: #333333;
-    margin: 0;
-}
-
-.product-detail-feature-table{
-    width: 100%;
-}
-
-.product-detail-feature-table tr:nth-of-type(2n) {
-    background-color: #ECF0F1;
-}
-
-.product-detail-feature-table p{
-    color: #333333;
-    font-size: 12pt;
-    margin: 0;
-    padding-left: 5px;
-}
-
-.product-detail-store-wrap{
-    width: 40%;
-    height: 40%;
-    float: left;
-    padding-top: 10px;
-    padding-left: 10px;
-    background-color: #ECF0F1;
-}
-
-.product-detail-store-wrap p {
-    color: white;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.product-detail-store-content{
-    width: 100%;
-    height: 100%;
-    background-color: #2C3E50;
-    padding: 10px 15px;
-    overflow-y: auto;
-}
-
-.product-detail-store-content::-webkit-scrollbar {
-    width: 10px;
-}
-
-.product-detail-store-content::-webkit-scrollbar-track {
-    border: 1px solid rgba(128, 128, 128, 0.5);
-}
-
-.product-detail-store-content::-webkit-scrollbar-thumb {
-    background-color: rgba(41, 128, 185, 0.3);
-}
-
-.product-detail-store-title-wrap{
-    width: 100%;
-    height: 30px;
-}
-.product-detail-store-title-wrap p {
-    font-size: 16pt;
-}
-.product-detail-store-address-wrap{
-    width: 100%;
-    height: 30px;
-    margin-top: 10px;
-}
-
-.product-detail-store-address-wrap p {
-    font-size: 12pt;
-}
-
-.product-detail-store-phone-wrap{
-    width: 100%;
-    height: 30px;
-    margin-top: 10px;
-}
-
-.product-detail-store-phone-wrap p {
-    font-size: 14pt;
-}
-
-.product-detail-store-worktime-wrap{
-    width: 100%;
-    height: 30px;
-    margin-top: 10px;
-}
-
-.product-detail-store-worktime-wrap p {
-    font-size: 12pt;
-}
-
-.product-detail-store-site-wrap{
-    width: 100%;
-    height: 30px;
-    margin-top: 10px;
-}
-.product-detail-store-site-wrap a {
-    text-decoration: none;
-}
-.product-detail-store-site-button{
-    width: 100px;
-    height: 100%;
-    background-color: #ECF0F1;
-    text-align:center;
-}
-.product-detail-store-site-button:hover {
-    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.4);
-}
-.product-detail-store-site-button p {
-    color: #333333;
-    margin: 0;
-    font-size: 12pt;
-    padding-top: 3px;
 }
 
 .stores_wrapper{
@@ -703,7 +455,7 @@ body {
     text-overflow: ellipsis;
 }
 .store_name p {
-    color: #333333;
+    color: black;
     margin:0;
 }
 .store_address {
@@ -716,7 +468,7 @@ body {
     text-overflow: ellipsis;
 }
 .store_address p {
-    color: #333333;
+    color: black;
     margin:0;
 }
 .store_phone {
@@ -729,7 +481,7 @@ body {
     text-overflow: ellipsis;
 }
 .store_phone p {
-    color: #333333;
+    color: black;
     margin:0;
 }
 .store-worktime-wrap {
@@ -741,7 +493,7 @@ body {
     text-overflow: ellipsis;
 }
 .store-worktime-wrap p {
-    color: #333333;
+    color: black;
     margin:0;
 }
 .store-site-wrap{
@@ -764,194 +516,44 @@ body {
     color: white;
 }
 .store-site-button p {
-    color: #333333;
+    color: black;
     margin: 0;
     font-size: 12pt;
     padding-top: 3px;
 }
 
-.store-detail-wrap{
-    width: calc(100% - 40px);
-    height: calc(100% - 60px);
-    background-color: #ECF0F1;
-    margin: auto;
-    margin-top: 20px;
-    position: relative;
-}
-
-.store-link:hover {
-    text-decoration: none;
-}
-
-.store-detail-info-wrap {
-    width: calc(50% - 20px);
-    height: 100%;
-    margin-right: 20px;
-    float: left;
-}
-
-.store-detail-info-image-wrap{
-    width: 100%;
-    height: 50%;
-}
-.store-detail-info-image-front{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.store-map-wrap{
-    width: 50%;
-    height: 100%;
-    float: left;
-}
-
-.store-map {
+.services_wrapper {
     width: 100%;
     height: 100%;
 }
 
-.store-detail-info-content-wrap{
-    width: 100%;
-    height: 50%;
-    float: left;
-    padding: 15px 15px 15px 20px;
-    background-color: white;
-}
-
-.store-detail-info-content-name {
-    width: 100%;
-    height: 30px;
-}
-
-.store-detail-info-content-name p {
-    color: #333333;
-    font-size: 14pt;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.store-detail-info-content-address {
-    width: 100%;
-    height: 30px;
-}
-
-.store-detail-info-content-address p {
-    color: #333333;
-    font-size: 12pt;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.store-detail-info-content-phone{
-    width: 100%;
-    height: 30px;
-}
-.store-detail-info-content-phone p {
-    color: #333333;
-    font-size: 12pt;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.store-detail-info-content-worktime {
-    width: 100%;
-    height: 30px;
-}
-.store-detail-info-content-worktime p {
-    color: #333333;
-    font-size: 12pt;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.store-detail-info-content-description {
-    width: 100%;
-    height: 90px;
-    overflow-y: auto;
-    margin-top: 10px;
-}
-
-.store-detail-info-content-description::-webkit-scrollbar {
-    width: 10px;
-}
-
-.store-detail-info-content-description::-webkit-scrollbar-track {
-    border: 1px solid rgba(128, 128, 128, 0.5);
-}
-
-.store-detail-info-content-description::-webkit-scrollbar-thumb {
-    background-color: rgba(41, 128, 185, 0.1);
-}
-
-.store-detail-info-content-description p {
-    color: #333333;
-    font-size: 12pt;
-    margin: 0;
-}
-
-.store-detail-info-content-sitelink-wrap {
-    width: 100%;
-    height: 30px;
-}
-.store-detail-info-content-sitelink-button {
-    width: 100px;
-    height: 30px;
-    background-color: #ECF0F1;
-    text-align: center;
-    cursor: pointer;
-}
-
-.store-detail-info-content-sitelink-button-text {
-    color: #333333;
-    font-size: 12pt;
-    padding-top: 4px;
-    margin: 0;
-}
-
-.store-detail-info-content-sitelink-button:hover {
-    background-color: #3498DB;
-}
-
-.store-detail-info-content-sitelink-button:hover .store-detail-info-content-sitelink-button-text {
-    color: white;
-}
-
-.contractors-wrap {
-    width: 100%;
-    height: 100%;
-}
-
-.contractors_grid {
+.services_grid {
     padding: 20px;
     padding-bottom: 60px;
     background-color: #ECF0F1;
     display: grid;
     grid-gap: 20px;
     grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-    grid-auto-rows: 350px;
+    grid-auto-rows: 390px;
 }
 
-.contractor {
+.service {
     background-color: white;
 }
 
-.contractor_image_wrap {
+.service:hover {
+
+}
+
+.service_image {
     width: 100%;
-    height: 200px;
+    height: 280px;
     float: left;
     background-color: white;
     position: relative;
 }
 
-.contractor_images_grid {
+.service_photo_hover_grid {
     position: absolute;
     top: 0;
     left: 0;
@@ -962,8 +564,7 @@ body {
     grid-template-rows: 1;
     z-index: 1;
 }
-
-.contractor_image_front{
+.service_image_front{
     position: absolute;
     top: 0;
     left: 0;
@@ -974,114 +575,377 @@ body {
     object-fit: cover;
 }
 
-.contractor-info-wrap{
+.service-text {
     width: 100%;
-    height: 150px;
-    padding: 15px 20px;
+    height: 140px;
+    float: left;
+    background-color: white;
+    padding: 10px 15px;
+    position: relative;
+}
+
+.service-name-wrap {
+    width: 100%;
+    height: 30px;
     float: left;
 }
 
-.contractor-name-wrap {
-    width: 100%;
-    height: 30px;
-    float: left;
-}
-.contractor-name-wrap p {
-    color: #333333;
+.service-name-wrap p {
     font-size: 14pt;
-    margin:0;
+    color: black;
+    margin: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.contractor-phone-wrap {
-    width: 100%;
+
+.service-price-wrap {
+    width: 50%;
     height: 30px;
     float: left;
 }
-.contractor-phone-wrap p {
-    color: #333333;
+
+.service-price-wrap p {
     font-size: 14pt;
-    margin:0;
+    color: black;
+    margin: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.contractor-specialty-wrap {
-    width: 100%;
+
+.service-works-wrap {
+    width: 50%;
     height: 30px;
     float: left;
+    text-align: right;
 }
-.contractor-specialty-text {
-    color: #333333;
+
+.service-works-text {
     font-size: 12pt;
-    margin:0;
+    color: black;
+    margin: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    float: left;
-}
-
-.contractor-specialty-counter-wrap {
-    width: auto;
-    height: 30px;
+    cursor: pointer;
     float: right;
     position: relative;
 }
-.contractor-specialty-counter {
-    font-size: 12pt;
-    color: #3498DB;
-    cursor: pointer;
+.service-works-text:hover {
+    text-decoration: underline;
 }
 
-.contractor-specialty-popup {
-    position: absolute;
-    width: auto;
+.service-works-popup {
+    width: 100%;
     height: auto;
+    max-height: 220px;
+    overflow-y: auto;
+    right: 0;
+    bottom: 100%;
+    position: absolute;
     background-color: white;
-    bottom:30px;
-    right: 10px;
-    padding: 5px 10px;
+    // box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid #ECF0F1;
+    border-top: 1px solid #ECF0F1;
+    padding: 10px 15px;
     z-index: 99;
-    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+    cursor: default;
+    text-align: left;
 }
 
-.contractor-specialty-popup p {
-    white-space: nowrap;
+.service-works-popup::-webkit-scrollbar {
+    width: 8px;
+}
+
+.service-works-popup::-webkit-scrollbar-track {
+    border: 0px;
+}
+
+.service-works-popup::-webkit-scrollbar-thumb {
+    background-color: rgba(44, 62, 80, 0.4);
+}
+
+.service-works-popup-text {
+    word-wrap:break-word;
     margin: 0;
     padding-left: 5px;
     padding-right: 5px;
     padding-bottom: 1px;
     font-size: 12pt;
-    color: #333333;
+    color: black;
+    width: 300px;
 }
 
-.contractor-specialty-popup p:nth-child(2n) {
+.service-works-popup-text:nth-child(2n) {
     background-color: #ECF0F1;
 }
 
-.contractor-services-wrap {
+.service-cotractor-wrap {
     width: 100%;
     height: 30px;
     float: left;
 }
-.contractor-services-button {
-    width: 100px;
-    height: 30px;
-    background-color: #ECF0F1;
-    text-align: center;
-    cursor: pointer;
-}
-.contractor-services-button p {
-    color: #333333;
-    padding-top: 3px;
+
+.service-cotractor-wrap p {
     font-size: 12pt;
+    color: black;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    float: left;
 }
 
-.contractor-services-button:hover {
+.service-cotractor-wrap p:hover{
+    text-decoration: underline;
+}
+
+.store_info_block_wrap {
+    background-color: transparent;
+    float: left;
+}
+.store_info_block {
+    position: fixed;
+    width: 400px;
+    height: calc(100vh - 40px);
+    background-color: transparent;
+    padding-top: 20px;
+    padding-right: 25px;
+    padding-bottom: 20px;
+}
+
+.store_info_content {
+    width: 100%;
+    height: 180px;
+    background-color: #2C3E50;
+    padding: 15px 20px;
+    position: relative;
+}
+
+.store_map {
+    width: 100%;
+    height: calc(100% - 180px - 20px - 20px);
+    margin-top: 20px;
+    background-color: transparent;
+}
+
+.store_info_name {
+    width: calc(100% - 30px);
+    height: 30px;
+}
+
+.store_info_name p {
+    font-size: 14pt;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.store_info_phone {
+    width: 100%;
+    height: 30px;
+}
+.store_info_phone p {
+    font-size: 12pt;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.store_info_address {
+    width: 100%;
+    height: 30px;
+}
+.store_info_address p {
+    font-size: 12pt;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.store_info_worktime {
+    width: 100%;
+    height: 30px;
+}
+
+.store_info_worktime p {
+    font-size: 12pt;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.store_info_sitelink {
+    width: 100%;
+    height: 30px;
+}
+
+.store_info_sitelink_button {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    background-color: #ECF0F1;
+    cursor: pointer;
+    float: left;
+}
+
+.store_info_sitelink_button:hover {
     background-color: #3498DB;
 }
 
-.contractor-services-button:hover p {
+.store_info_sitelink_button:hover p {
     color: white;
+}
+
+.store_info_sitelink_button p {
+    font-size: 12pt;
+    color: black;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 3px;
+}
+
+.store_info_close_wrap {
+    width: 35px;
+    height: 35px;
+    background-color: #ECF0F1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+
+.store_info_close {
+    width: 100%;
+    height: 100%;
+    background-color: #2C3E50;
+    position: relative;
+    cursor: pointer;
+}
+
+.store_info_close img {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    object-fit: cover;
+    top: 7px;
+    left : 7px;
+}
+
+.store_info_close:hover {
+    background-color: rgba(44, 62, 80, 0.8);
+}
+
+.store_info_all_products_button {
+    width: 120px;
+    height: 30px;
+    text-align: center;
+    background-color: #ECF0F1;
+    cursor: pointer;
+    float: left;
+    margin-left: 20px;
+}
+
+.store_info_all_products_button:hover {
+    background-color: #3498DB;
+}
+
+.store_info_all_products_button:hover p {
+    color: white;
+}
+
+.store_info_all_products_button p {
+    font-size: 12pt;
+    color: black;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 3px;
+}
+
+.products_features_wrap {
+    width: calc(100% - 40px);
+    height: 30px;
+    float: left;
+}
+
+.products_features_title {
+    color: black;
+    font-size: 12pt;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    float: left;
+    cursor: pointer;
+}
+.products_features_title:hover {
+    text-decoration: underline;
+    //color: #3498DB;
+}
+
+
+.products_features_popup {
+    width: 100%;
+    height: auto;
+    max-height: 220px;
+    overflow-y: auto;
+    right: 0;
+    bottom: 100%;
+    position: absolute;
+    background-color: white;
+    // box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid #ECF0F1;
+    border-top: 1px solid #ECF0F1;
+    padding: 10px 15px;
+    z-index: 99;
+    cursor: default;
+    text-align: left;
+}
+
+.products_features_popup::-webkit-scrollbar {
+    width: 10px;
+}
+
+.products_features_popup::-webkit-scrollbar-track {
+    border: 0px;
+}
+
+.products_features_popup::-webkit-scrollbar-thumb {
+    background-color: rgba(44, 62, 80, 0.4);
+}
+
+.product-feature-table {
+    width: 100%;
+    height: 100%;
+}
+.product-feature-table td {
+    word-wrap:break-word;
+    margin: 0;
+    margin-bottom: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: black;
+    max-width: 130px;
+    font-size: 12pt;
+}
+.products_features_popup tr:nth-child(2n){
+    background-color: #ECF0F1;
+}
+
+.service-contractor-phone{
+    width: calc(100% - 50px);
+    float: left;
+    height: 30px;
+}
+.service-contractor-phone p {
+    font-size: 12pt;
+    font-weight: 600;
+    margin:0;
+    padding:0;
 }

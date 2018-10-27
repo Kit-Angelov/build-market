@@ -37,7 +37,6 @@ class StoreAdmin(admin.ModelAdmin):
     inlines = [StorePhotoRelativeAdmin, ]
 
 
-admin.site.register(models.ProductUse)
 admin.site.register(models.ProductFeature)
 
 
@@ -70,17 +69,13 @@ class ProductPhotoRelativeAdmin(admin.StackedInline):
     )
 
 
-class ProductUsesRelativeAdmin(admin.StackedInline):
-    model = models.ProductUse
-
-
 class ProductFeaturesRelativeAdmin(admin.StackedInline):
     model = models.ProductFeature
 
 
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
-    inlines = [ProductPhotoRelativeAdmin, ProductUsesRelativeAdmin, ProductFeaturesRelativeAdmin]
+    inlines = [ProductPhotoRelativeAdmin, ProductFeaturesRelativeAdmin]
 
 
 @admin.register(models.ContractorPhoto)
@@ -98,9 +93,6 @@ class ContractorPhotoAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(models.ContractorSpecialty)
-
-
 class ContractorPhotoRelativeAdmin(admin.StackedInline):
     model = models.ContractorPhoto
 
@@ -115,10 +107,47 @@ class ContractorPhotoRelativeAdmin(admin.StackedInline):
     )
 
 
-class ContractorSpecialtyRelativeAdmin(admin.StackedInline):
-    model = models.ContractorSpecialty
-
-
 @admin.register(models.Contractor)
 class ContractorAdmin(admin.ModelAdmin):
-    inlines = [ContractorSpecialtyRelativeAdmin, ContractorPhotoRelativeAdmin]
+    inlines = [ContractorPhotoRelativeAdmin, ]
+
+
+@admin.register(models.ServicePhoto)
+class ServicePhotoAdmin(admin.ModelAdmin):
+
+    fields = ["service", "photo", "photo_view"]
+    readonly_fields = ('photo_view',)
+
+    def photo_view(self, obj):
+        return mark_safe('<img src="{url}" width="{width}" height={height} />'.format(
+            url = obj.photo.url,
+            width=200,
+            height=150,
+            )
+    )
+
+
+admin.site.register(models.ServiceWork)
+
+
+class ServicePhotoRelativeAdmin(admin.StackedInline):
+    model = models.ServicePhoto
+
+    readonly_fields = ('photo_view',)
+
+    def photo_view(self, obj):
+        return mark_safe('<img src="{url}" width="{width}" height={height} />'.format(
+            url=obj.photo.url,
+            width=200,
+            height=150,
+        )
+    )
+
+
+class ServiceWorkRelativeAdmin(admin.StackedInline):
+    model = models.ServiceWork
+
+
+@admin.register(models.Service)
+class ServiceAdmin(admin.ModelAdmin):
+    inlines = [ServiceWorkRelativeAdmin, ServicePhotoRelativeAdmin]

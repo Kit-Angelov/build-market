@@ -20,9 +20,11 @@ class Store(models.Model):
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
     views = models.IntegerField(default=0)
     created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
     work_time_start = models.TimeField(blank=True, null=True)
     work_time_end = models.TimeField(blank=True, null=True)
     work_days = models.IntegerField(blank=True, null=True)
+    actual = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
@@ -59,14 +61,6 @@ class ProductFeature(models.Model):
         return '{}: {}'.format(self.title, self.text)
 
 
-class ProductUse(models.Model):
-    text = models.CharField(max_length=255, primary_key=True)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.text
-
-
 class ProductPhoto(models.Model):
     photo = models.ImageField(upload_to='product')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -78,14 +72,12 @@ class ProductPhoto(models.Model):
 class Contractor(models.Model):
     name = models.CharField(max_length=255)
     phone = models.CharField(max_length=255, blank=True, null=True)
-
-    def __str__(self):
-        return self.name
-
-
-class ContractorSpecialty(models.Model):
-    name = models.CharField(max_length=255)
-    contractor = models.ForeignKey(Contractor, on_delete=models.CASCADE)
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
+    views = models.IntegerField(default=0)
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    actual = models.BooleanField(default=True)
+    city = models.ForeignKey(City, blank=True, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.name
@@ -97,3 +89,32 @@ class ContractorPhoto(models.Model):
 
     def __str__(self):
         return self.photo.name
+
+
+class Service(models.Model):
+    name = models.CharField(max_length=255)
+    contractor = models.ForeignKey(Contractor, on_delete=models.CASCADE)
+    price = models.FloatField()
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
+    views = models.IntegerField(default=0)
+    actual = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+
+class ServicePhoto(models.Model):
+    photo = models.ImageField(upload_to='service')
+    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.photo.name
+
+
+class ServiceWork(models.Model):
+    name = models.CharField(max_length=255)
+    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name

@@ -1,11 +1,12 @@
 {% extends 'app/base.html' %}
 {% load static %}
+{% load work_days %}
 {% block content %}
-    <div class="products_wrapper" id="products">
+<div class="products_main_wrap" id="products">
+    <div class="products_wrapper" >
         <div class="products_grid">
             {% for product in products %}
             <div class="product">
-                <a class="product-link" href="/products/{{product.id}}">
                 <div class="product_image">
                     <div class="product_photo_hover_grid">
                         {% for photo in product.productphoto_set.all %}
@@ -14,10 +15,7 @@
                     </div>
                     <img class="product_image_front" :src="current_photo['{{forloop.counter}}'] || '{{product.productphoto_set.all.0.photo.url}}'"/>
                 </div>
-                </a>
                 <div class="product_text">
-                    <a class="product-link" href="/products/{{product.id}}">
-                    <div class="product_main_info">
                         <div class="product_name">
                             <p>{{ product.name }}</p>
                         </div>
@@ -25,35 +23,112 @@
                             <p>{{ product.price }} руб.</p>
                         </div>
                         <div class="product_store">
-                            <p>{{ product.store.name }}</p>
+                            <p v-on:click="detailView('{{ product.store.name }}', '{{ product.store.address }}', '{{ product.store.phone }}', '{{ product.store.site }}', '{{ product.store.work_time_start | time:'H:i' }}', '{{ product.store.work_time_end | time:'H:i' }}', '{{ product.store.work_days | days_format }}')">{{ product.store.name }}</p>
                         </div>
-                        <div class="product_site_link_wrap">
-                            <div class="product_site_link_button">
-                                <p class="product_site_link_button_text">веб-сайт</p>
+                        {% if product.productfeature_set.all %}
+                        <div class="products_features_wrap">
+                            <p class="products_features_title" v-on:click.stop="productFeatureClick('{{forloop.counter}}')">характеристики</p>
+                            <div class="products_features_popup" v-show="features_flag['{{forloop.counter}}'] || false">
+                                <table class="product-feature-table">
+                                    {% for feature in product.productfeature_set.all %}
+                                    <tr>
+                                        <td>{{ feature.title | lower }}</td>
+                                        <td>&nbsp;:&nbsp;</td>
+                                        <td>{{ feature.text | lower }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </table>
                             </div>
                         </div>
-                    </div>
-                    </a>
+                        {% endif %}
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
-
+    <div class="store_info_block_wrap" v-show="detailCheck">
+        <div class="store_info_block">
+            <div class="store_info_content">
+                <div class="store_info_close_wrap">
+                    <div class="store_info_close" v-on:click="closeDetailView()">
+                        <img src="{% static 'app/img/cross-white.svg' %}">
+                    </div>
+                </div>
+                <div class="store_info_name">
+                    <p>${detailViewObj.name}</p>
+                </div>
+                <div class="store_info_address">
+                    <p>${detailViewObj.address}</p>
+                </div>
+                <div class="store_info_phone">
+                    <p>${detailViewObj.phone}</p>
+                </div>
+                <div class="store_info_worktime">
+                    <p>${detailViewObj.workTimeText}</p>
+                </div>
+                <div class="store_info_sitelink">
+                    <div class="store_info_sitelink_button">
+                        <p>веб-сайт</p>
+                    </div>
+                    <div class="store_info_all_products_button">
+                        <p>все товары</p>
+                    </div>
+                </div>
+            </div>
+            <div class="store_map" id="store-map">
+            </div>
+        </div>
+    </div>
+</div>
 <script>
 new Vue({
   delimiters: ['${', '}'],
   el: '#products',
   data: {
     current_photo: {},
+    detailViewObj: {},
+    detailCheck: false,
+    features_flag: {},
   },
   methods: {
+    productFeatureClick(index) {
+        let value = this.features_flag[index];
+        Vue.set(this.features_flag, index, !value);
+    },
     imageMouseOver (imageUrl, index) {
         Vue.set(this.current_photo, index, imageUrl);
+    },
+    detailView(name, address, phone, site, workstart, workend, workdays) {
+        if (this.detailCheck) {
+            this.closeDetailView();
+        } else {
+            Vue.set(this.detailViewObj, 'name', name);
+            Vue.set(this.detailViewObj, 'address', address);
+            Vue.set(this.detailViewObj, 'phone', phone);
+            Vue.set(this.detailViewObj, 'site', site);
+            Vue.set(this.detailViewObj, 'workTimeText', workstart + ' - ' + workend + ' | ' + workdays)
+            this.detailCheck = true;
+            var productsMainWrap = document.getElementById('products');
+            productsMainWrap.style.gridTemplateColumns = 'repeat(auto-fit, minmax(50%, 1fr)) 400px';
+         }
+    },
+    closeDetailView() {
+        this.detailCheck = false;
+        var productsMainWrap = document.getElementById('products');
+        productsMainWrap.style.gridTemplateColumns = 'repeat(auto-fit, minmax(50%, 1fr))';
     }
   }
 });
 </script>
+<script>
+function initMap() {
+    var map = new google.maps.Map(document.getElementById('store-map'), {
+        center: {lat: 51.7139853 , lng: 39.1518986},
+        zoom: 15
+    });
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjXLyo0MPbU6mkNHF2u8S5u3Xcep2o_hk&callback=initMap"async defer></script>
 {% endblock %}
 {% block paginator %}
 

@@ -1,11 +1,97 @@
-<!DOCTYPE html>
 {% extends 'app/base.html' %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% load static %}
+{% block content %}
+<div class="services_wrapper" id="services">
+    <div class="services_grid">
+        {% for service in services %}
+        <div class="service">
+            <div class="service_image">
+                <div class="service_photo_hover_grid">
+                    {% for photo in service.servicephoto_set.all %}
+                    <div class="service_photo_col" v-on:mouseover="imageMouseOver('{{photo.photo.url}}', '{{forloop.parentloop.counter}}')"></div>
+                    {% endfor %}
+                </div>
+                <img class="service_image_front" :src="current_photo['{{forloop.counter}}'] || '{{service.servicephoto_set.all.0.photo.url}}'"/>
+            </div>
+            <div class="service-text">
+                <div class="service-name-wrap">
+                    <p>{{ service.name }}</p>
+                </div>
+                <div class="service-price-wrap">
+                    <p>{{ service.price }} руб.</p>
+                </div>
+                {% if service.servicework_set.all %}
+                <div class="service-works-wrap">
+                    <p class="service-works-text" v-on:click.stop="worksMouseClick('{{forloop.counter}}')">состав работ</p>
+                    <div class="service-works-popup" v-on:click.stop v-show="works_flag['{{forloop.counter}}'] || false">
+                        {% for work in service.servicework_set.all %}
+                        <p class="service-works-popup-text">{{ work.name }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                <div class="service-cotractor-wrap">
+                    <p>{{ service.contractor.name }}</p>
+                </div>
+                <div class="service-contractor-phone">
+                    <p>{{ service.contractor.phone }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
-</body>
-</html>
+<script>
+new Vue({
+  delimiters: ['${', '}'],
+  el: '#services',
+  data: {
+    current_photo: {},
+    works_flag: {}
+  },
+  methods: {
+    worksMouseClick(index) {
+        let value = this.works_flag[index];
+        Vue.set(this.works_flag, index, !value);
+    },
+    imageMouseOver (imageUrl, index) {
+        Vue.set(this.current_photo, index, imageUrl);
+    }
+  }
+});
+</script>
+{% endblock %}
+{% block paginator %}
+
+    {% if services.has_previous %}
+    <a href="?page=1">
+    <div class="product_paginator_first paginator_first paginator_elem">
+        <img src="{% static 'app/img/paginator-first.svg' %}">
+    </div>
+    </a>
+    <a href="?page={{ services.previous_page_number }}">
+    <div class="product_paginator_prev paginator_prev paginator_elem">
+        <img src="{% static 'app/img/paginator-prev.svg' %}">
+    </div>
+    </a>
+    {% endif %}
+    {% if services.paginator.num_pages > 1 %}
+    <div class="product_paginator_current paginator_current">
+        <p>{{ services.number }} из {{ services.paginator.num_pages }}</p>
+    </div>
+    {% endif %}
+
+    {% if services.has_next %}
+    <a href="?page={{ services.next_page_number }}">
+    <div class="product_paginator_next paginator_next paginator_elem">
+        <img src="{% static 'app/img/paginator-next.svg' %}">
+    </div>
+    </a>
+    <a href="?page={{ services.paginator.num_pages }}">
+    <div class="product_paginator_last paginator_last paginator_elem">
+        <img src="{% static 'app/img/paginator-last.svg' %}">
+    </div>
+    </a>
+    {% endif %}
+{% endblock %}
