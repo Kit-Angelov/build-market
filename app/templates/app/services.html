@@ -48,6 +48,40 @@
         </div>
         {% endfor %}
     </div>
+    <div class="paginator_wrapp">
+        <div class="paginator">
+            {% if services.has_previous %}
+            <a href="?page=1">
+            <div class="product_paginator_first paginator_first paginator_elem">
+                <img src="{% static 'app/img/paginator-first.svg' %}">
+            </div>
+            </a>
+            <a href="?page={{ services.previous_page_number }}">
+            <div class="product_paginator_prev paginator_prev paginator_elem">
+                <img src="{% static 'app/img/paginator-prev.svg' %}">
+            </div>
+            </a>
+            {% endif %}
+            {% if services.paginator.num_pages > 1 %}
+            <div class="product_paginator_current paginator_current">
+                <p>{{ services.number }} из {{ services.paginator.num_pages }}</p>
+            </div>
+            {% endif %}
+
+            {% if services.has_next %}
+            <a href="?page={{ services.next_page_number }}">
+            <div class="product_paginator_next paginator_next paginator_elem">
+                <img src="{% static 'app/img/paginator-next.svg' %}">
+            </div>
+            </a>
+            <a href="?page={{ services.paginator.num_pages }}">
+            <div class="product_paginator_last paginator_last paginator_elem">
+                <img src="{% static 'app/img/paginator-last.svg' %}">
+            </div>
+            </a>
+            {% endif %}
+        </div>
+    </div>
 </div>
 
 <script>
@@ -69,37 +103,4 @@ new Vue({
   }
 });
 </script>
-{% endblock %}
-{% block paginator %}
-
-    {% if services.has_previous %}
-    <a href="?page=1">
-    <div class="product_paginator_first paginator_first paginator_elem">
-        <img src="{% static 'app/img/paginator-first.svg' %}">
-    </div>
-    </a>
-    <a href="?page={{ services.previous_page_number }}">
-    <div class="product_paginator_prev paginator_prev paginator_elem">
-        <img src="{% static 'app/img/paginator-prev.svg' %}">
-    </div>
-    </a>
-    {% endif %}
-    {% if services.paginator.num_pages > 1 %}
-    <div class="product_paginator_current paginator_current">
-        <p>{{ services.number }} из {{ services.paginator.num_pages }}</p>
-    </div>
-    {% endif %}
-
-    {% if services.has_next %}
-    <a href="?page={{ services.next_page_number }}">
-    <div class="product_paginator_next paginator_next paginator_elem">
-        <img src="{% static 'app/img/paginator-next.svg' %}">
-    </div>
-    </a>
-    <a href="?page={{ services.paginator.num_pages }}">
-    <div class="product_paginator_last paginator_last paginator_elem">
-        <img src="{% static 'app/img/paginator-last.svg' %}">
-    </div>
-    </a>
-    {% endif %}
 {% endblock %}

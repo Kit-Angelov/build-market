@@ -3,7 +3,8 @@
 {% load work_days %}
 {% block content %}
 <div class="products_main_wrap" id="products">
-    <div class="products_wrapper" >
+    <div class="products_wrapper_col">
+    <div class="products_wrapper">
         <div class="products_grid">
             {% for product in products %}
             <div class="product">
@@ -53,6 +54,41 @@
             {% endfor %}
         </div>
     </div>
+        <div class="paginator_wrapp">
+            <div class="paginator">
+                {% if products.has_previous %}
+                <a href="?page=1">
+                <div class="product_paginator_first paginator_first paginator_elem">
+                    <img src="{% static 'app/img/paginator-first.svg' %}">
+                </div>
+                </a>
+                <a href="?page={{ products.previous_page_number }}">
+                <div class="product_paginator_prev paginator_prev paginator_elem">
+                    <img src="{% static 'app/img/paginator-prev.svg' %}">
+                </div>
+                </a>
+                {% endif %}
+                {% if products.paginator.num_pages > 1 %}
+                <div class="product_paginator_current paginator_current">
+                    <p>{{ products.number }} из {{ products.paginator.num_pages }}</p>
+                </div>
+                {% endif %}
+
+                {% if products.has_next %}
+                <a href="?page={{ products.next_page_number }}">
+                <div class="product_paginator_next paginator_next paginator_elem">
+                    <img src="{% static 'app/img/paginator-next.svg' %}">
+                </div>
+                </a>
+                <a href="?page={{ products.paginator.num_pages }}">
+                <div class="product_paginator_last paginator_last paginator_elem">
+                    <img src="{% static 'app/img/paginator-last.svg' %}">
+                </div>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
     <div class="store_info_block_wrap" v-show="detailCheck">
         <div class="store_info_block">
             <div class="store_info_content">
@@ -99,7 +135,7 @@ new Vue({
   },
   methods: {
     productFeatureClick(index) {
-        let value = this.features_flag[index];
+        var value = this.features_flag[index];
         Vue.set(this.features_flag, index, !value);
     },
     imageMouseOver (imageUrl, index) {
@@ -117,12 +153,16 @@ new Vue({
             this.detailCheck = true;
             var productsMainWrap = document.getElementById('products');
             productsMainWrap.style.gridTemplateColumns = 'repeat(auto-fit, minmax(50%, 1fr)) 400px';
+            var paginatorWrap = document.getElementsByClassName('paginator_wrapp')[0];
+            paginatorWrap.style.width = 'calc(100% - 200px - 400px)';
          }
     },
     closeDetailView() {
         this.detailCheck = false;
         var productsMainWrap = document.getElementById('products');
         productsMainWrap.style.gridTemplateColumns = 'repeat(auto-fit, minmax(50%, 1fr))';
+        var paginatorWrap = document.getElementsByClassName('paginator_wrapp')[0];
+        paginatorWrap.style.width = 'calc(100% - 200px)';
     }
   }
 });
@@ -136,39 +176,4 @@ function initMap() {
 }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjXLyo0MPbU6mkNHF2u8S5u3Xcep2o_hk&callback=initMap"async defer></script>
-{% endblock %}
-{% block paginator %}
-
-    {% if products.has_previous %}
-    <a href="?page=1">
-    <div class="product_paginator_first paginator_first paginator_elem">
-        <img src="{% static 'app/img/paginator-first.svg' %}">
-    </div>
-    </a>
-    <a href="?page={{ products.previous_page_number }}">
-    <div class="product_paginator_prev paginator_prev paginator_elem">
-        <img src="{% static 'app/img/paginator-prev.svg' %}">
-    </div>
-    </a>
-    {% endif %}
-    {% if products.paginator.num_pages > 1 %}
-    <div class="product_paginator_current paginator_current">
-        <p>{{ products.number }} из {{ products.paginator.num_pages }}</p>
-    </div>
-    {% endif %}
-
-    {% if products.has_next %}
-    <a href="?page={{ products.next_page_number }}">
-    <div class="product_paginator_next paginator_next paginator_elem">
-        <img src="{% static 'app/img/paginator-next.svg' %}">
-    </div>
-    </a>
-    <a href="?page={{ products.paginator.num_pages }}">
-    <div class="product_paginator_last paginator_last paginator_elem">
-        <img src="{% static 'app/img/paginator-last.svg' %}">
-    </div>
-    </a>
-    {% endif %}
-
-
 {% endblock %}

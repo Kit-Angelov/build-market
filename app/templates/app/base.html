@@ -10,14 +10,24 @@
     <title>B-MARKET</title>
 </head>
 <body>
-    <div class="main">
+    <div class="main" id="main">
         <div class="left_part">
             <div class="logo">
                 <p>B&#183;MARKET</p>
             </div>
-            <div class="main_menu">
+            <div class="main_menu" id="main_menu">
                 <div class="main_menu_elem {% if active == 'products'%}active{% endif %}"><a href="/"><p>товары</p></a></div>
                 <div class="main_menu_elem {% if active == 'services'%}active{% endif %}"><a href="/services"><p>услуги</p></a></div>
+                <div class="main_menu_elem favorits_flag_wrap">
+                    <div class="favorits_label">
+                        <p v-if="favoritFlag">все</p>
+                        <p v-else>избранное</p>
+                    </div>
+                    <label class="switch">
+                      <input type="checkbox" v-model="favoritFlag">
+                      <span class="slider round"></span>
+                    </label>
+                </div>
             </div>
         </div>
         <div class="right_part">
@@ -29,14 +39,19 @@
                 <!--<div class="dotted"></div>-->
                 {% block content %}
                 {% endblock %}
-                <div class="paginator_wrapp">
-                    <div class="paginator">
-                        {% block paginator %}
-                        {% endblock %}
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </body>
+<script>
+new Vue({
+  delimiters: ['${', '}'],
+  el: '#main_menu',
+  data: {
+      favoritFlag: false
+  },
+  methods: {
+  }
+});
+</script>
 </html>

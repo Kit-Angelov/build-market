@@ -1,11 +1,11 @@
-from django.shortcuts import render, Http404
+from django.shortcuts import render
 from . import models
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def products(request):
     if request.method == 'GET':
-        product_list = models.Product.objects.all()
+        product_list = models.Product.objects.all().order_by('id')
         paginator = Paginator(product_list, 2)
         page = request.GET.get('page')
         try:
@@ -21,7 +21,7 @@ def products(request):
 
 def services(request):
     if request.method == 'GET':
-        service_list = models.Service.objects.all()
+        service_list = models.Service.objects.all().order_by('id')
         paginator = Paginator(service_list, 2)
         page = request.GET.get('page')
         try:

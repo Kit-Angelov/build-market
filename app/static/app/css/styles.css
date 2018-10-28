@@ -119,6 +119,9 @@ body {
 .paginator_wrapp{
     position: fixed;
     width: calc(100% - 200px);
+    margin:auto;
+    height: 0;
+    background-color: blue;
     bottom: 0;
     z-index: 99;
 }
@@ -133,6 +136,7 @@ body {
 .paginator_elem {
     background-color: white;
     cursor: pointer;
+    border: 1px solid #ECF0F1;
 }
 .paginator_elem:hover{
     background-color: #d1d1d1;
@@ -169,6 +173,7 @@ body {
     float: left;
     text-align: center;
     background-color: white;
+    border: 1px solid #ECF0F1;
 }
 .paginator_current p {
     font-size: 12pt;
@@ -214,7 +219,6 @@ body {
     position: fixed;
     top: 40px;
     background-color: #ECF0F1;
-    overflow-y: auto;
     z-index: 8;
     /*background-image: -webkit-repeating-radial-gradient(center center, rgba(0,0,0,.1), rgba(0,0,0,.1) 1px, transparent 1px, transparent 100%);*/
     /*background-image: -moz-repeating-radial-gradient(center center, rgba(0,0,0,.1), rgba(0,0,0,.1) 1px, transparent 1px, transparent 100%);*/
@@ -224,26 +228,33 @@ body {
     /*-moz-background-size: 6px 6px;*/
     /*background-size: 6px 6px;*/
 }
-.content::-webkit-scrollbar {
-    width: 8px;
-}
-
-.content::-webkit-scrollbar-track {
-    border: 0px;
-}
-
-.content::-webkit-scrollbar-thumb {
-    background-color: rgba(44, 62, 80, 0.4);
-}
 .products_main_wrap {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
-    grid-template-rows: 1;
+    width: 100%;
+    height: 100%;
+    display: table;
+}
+.products_wrapper_col {
+    display: table-cell;
+    position: relative;
+    vertical-align: top;
+    height: 100%;
+    width: 100%;
 }
 .products_wrapper{
     width: 100%;
     height: 100%;
-    float: left;
+    overflow-y: scroll;
+}
+.products_wrapper::-webkit-scrollbar {
+    width: 8px;
+}
+
+.products_wrapper::-webkit-scrollbar-track {
+    border: 0px;
+}
+
+.products_wrapper::-webkit-scrollbar-thumb {
+    background-color: rgba(44, 62, 80, 0.4);
 }
 .products_grid{
     padding: 20px;
@@ -552,6 +563,7 @@ body {
 }
 
 .services_wrapper {
+    position: relative;
     width: 100%;
     height: 100%;
 }
@@ -736,17 +748,17 @@ body {
 }
 
 .store_info_block_wrap {
+    display: table-cell;
     background-color: transparent;
-    float: left;
+    float: right;
+    width: 400px;
+    height: calc(100vh - 40px);
 }
 .store_info_block {
     position: fixed;
-    width: 400px;
-    height: calc(100vh - 40px);
-    background-color: transparent;
-    padding-top: 20px;
-    padding-right: 25px;
-    padding-bottom: 20px;
+    width: inherit;
+    height: calc(100% - 20px);
+    padding: 10px;
 }
 
 .store_info_content {
@@ -1014,4 +1026,74 @@ body {
     height: 16px;
     object-fit: cover;
     margin: 7px;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+  float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(30px);
+  -ms-transform: translateX(30px);
+  transform: translateX(30px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.favorits_label{
+    width: calc(100% - 70px);
+    height: 100%;
+    text-align: center;
+    float: left;
 }
