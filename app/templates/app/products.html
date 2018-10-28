@@ -19,28 +19,35 @@
                         <div class="product_name">
                             <p>{{ product.name }}</p>
                         </div>
-                        <div class="product_price">
-                            <p>{{ product.price }} руб.</p>
+                        <div class="price_and_features">
+                            <div class="product_price">
+                                <p>{{ product.price }} руб.</p>
+                            </div>
+                            {% if product.productfeature_set.all %}
+                            <div class="products_features_wrap">
+                                <p class="products_features_title" v-on:click.stop="productFeatureClick('{{forloop.counter}}')">характеристики</p>
+                                <div class="products_features_popup" v-show="features_flag['{{forloop.counter}}'] || false">
+                                    <table class="product-feature-table">
+                                        {% for feature in product.productfeature_set.all %}
+                                        <tr>
+                                            <td>{{ feature.title | lower }}</td>
+                                            <td>&nbsp;:&nbsp;</td>
+                                            <td>{{ feature.text | lower }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                            {% endif %}
                         </div>
                         <div class="product_store">
                             <p v-on:click="detailView('{{ product.store.name }}', '{{ product.store.address }}', '{{ product.store.phone }}', '{{ product.store.site }}', '{{ product.store.work_time_start | time:'H:i' }}', '{{ product.store.work_time_end | time:'H:i' }}', '{{ product.store.work_days | days_format }}')">{{ product.store.name }}</p>
                         </div>
-                        {% if product.productfeature_set.all %}
-                        <div class="products_features_wrap">
-                            <p class="products_features_title" v-on:click.stop="productFeatureClick('{{forloop.counter}}')">характеристики</p>
-                            <div class="products_features_popup" v-show="features_flag['{{forloop.counter}}'] || false">
-                                <table class="product-feature-table">
-                                    {% for feature in product.productfeature_set.all %}
-                                    <tr>
-                                        <td>{{ feature.title | lower }}</td>
-                                        <td>&nbsp;:&nbsp;</td>
-                                        <td>{{ feature.text | lower }}</td>
-                                    </tr>
-                                    {% endfor %}
-                                </table>
+                        <div class="product-functional-wrap functional-wrap">
+                            <div class="product-to_bookmark to_bookmark">
+                                <img src="{% static 'app/img/star.svg' %}">
                             </div>
                         </div>
-                        {% endif %}
                 </div>
             </div>
             {% endfor %}

@@ -17,24 +17,32 @@
                 <div class="service-name-wrap">
                     <p>{{ service.name }}</p>
                 </div>
-                <div class="service-price-wrap">
-                    <p>{{ service.price }} руб.</p>
-                </div>
-                {% if service.servicework_set.all %}
-                <div class="service-works-wrap">
-                    <p class="service-works-text" v-on:click.stop="worksMouseClick('{{forloop.counter}}')">состав работ</p>
-                    <div class="service-works-popup" v-on:click.stop v-show="works_flag['{{forloop.counter}}'] || false">
-                        {% for work in service.servicework_set.all %}
-                        <p class="service-works-popup-text">{{ work.name }}</p>
-                        {% endfor %}
+                <div class="price_and_works">
+                    <div class="service-price-wrap">
+                        <p>{{ service.price }} руб.</p>
                     </div>
+                    {% if service.servicework_set.all %}
+                    <div class="service-works-wrap">
+                        <p class="service-works-text" v-on:click.stop="worksMouseClick('{{forloop.counter}}')">состав работ</p>
+                        <div class="service-works-popup" v-on:click.stop v-show="works_flag['{{forloop.counter}}'] || false">
+                            {% for work in service.servicework_set.all %}
+                            <p class="service-works-popup-text">{{ work.name }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
-                {% endif %}
                 <div class="service-cotractor-wrap">
                     <p>{{ service.contractor.name }}</p>
                 </div>
                 <div class="service-contractor-phone">
                     <p>{{ service.contractor.phone }}</p>
+                </div>
+
+                <div class="service-functional-wrap functional-wrap">
+                    <div class="service-to_bookmark to_bookmark">
+                        <img src="{% static 'app/img/star.svg' %}">
+                    </div>
                 </div>
             </div>
         </div>

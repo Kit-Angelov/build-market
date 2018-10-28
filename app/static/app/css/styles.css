@@ -192,7 +192,22 @@ body {
     height: 40px;
     float: left;
 }
-
+.dotted {
+  position: fixed;
+    top:0;
+    left:0;
+  padding: 2.25em 1.6875em;
+  background-image: -webkit-repeating-radial-gradient(center center, rgba(0,0,0,.1), rgba(0,0,0,.1) 1px, transparent 1px, transparent 100%);
+  background-image: -moz-repeating-radial-gradient(center center, rgba(0,0,0,.1), rgba(0,0,0,.1) 1px, transparent 1px, transparent 100%);
+  background-image: -ms-repeating-radial-gradient(center center, rgba(0,0,0,.1), rgba(0,0,0,.1) 1px, transparent 1px, transparent 100%);
+  background-image: repeating-radial-gradient(center center, rgba(0,0,0,.1), rgba(0,0,0,.1) 1px, transparent 1px, transparent 100%);
+  -webkit-background-size: 3px 3px;
+  -moz-background-size: 3px 3px;
+  background-size: 3px 3px;
+    z-index: 0;
+  width:100%;
+  height: 100%;
+}
 .content{
     width: calc(100% - 200px);
     height: calc(100% - 40px);
@@ -201,6 +216,13 @@ body {
     background-color: #ECF0F1;
     overflow-y: auto;
     z-index: 8;
+    /*background-image: -webkit-repeating-radial-gradient(center center, rgba(0,0,0,.1), rgba(0,0,0,.1) 1px, transparent 1px, transparent 100%);*/
+    /*background-image: -moz-repeating-radial-gradient(center center, rgba(0,0,0,.1), rgba(0,0,0,.1) 1px, transparent 1px, transparent 100%);*/
+    /*background-image: -ms-repeating-radial-gradient(center center, rgba(0,0,0,.1), rgba(0,0,0,.1) 1px, transparent 1px, transparent 100%);*/
+    /*background-image: repeating-radial-gradient(center center, rgba(0,0,0,.1), rgba(0,0,0,.1) 1px, transparent 1px, transparent 100%);*/
+    /*-webkit-background-size: 6px 6px;*/
+    /*-moz-background-size: 6px 6px;*/
+    /*background-size: 6px 6px;*/
 }
 .content::-webkit-scrollbar {
     width: 8px;
@@ -226,7 +248,7 @@ body {
 .products_grid{
     padding: 20px;
     padding-bottom: 60px;
-    background-color: #ECF0F1;
+    background-color: transparent;
     display: grid;
     grid-gap: 20px;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -295,9 +317,16 @@ body {
     float: left;
 }
 
-.product_price {
+.price_and_features{
     width: 100%;
     height: 30px;
+    float: left;
+}
+
+.product_price {
+    width: auto;
+    height: 30px;
+    float: left;
 }
 
 .product_price p{
@@ -324,12 +353,12 @@ body {
     background-color: white;
     padding: 7px;
     padding-left: 15px;
-    float: left;
 }
 
 .product_store {
     width: 100%;
     height: 30px;
+    float: left;
 }
 
 .product_store p{
@@ -530,7 +559,7 @@ body {
 .services_grid {
     padding: 20px;
     padding-bottom: 60px;
-    background-color: #ECF0F1;
+    background-color: transparent;
     display: grid;
     grid-gap: 20px;
     grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
@@ -598,9 +627,13 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
+.price_and_works{
+    width: 100%;
+    height: 30px;
+    float: left;
+}
 .service-price-wrap {
-    width: 50%;
+    width: auto;
     height: 30px;
     float: left;
 }
@@ -615,9 +648,9 @@ body {
 }
 
 .service-works-wrap {
-    width: 50%;
+    width: auto;
     height: 30px;
-    float: left;
+    float: right;
     text-align: right;
 }
 
@@ -870,9 +903,9 @@ body {
 }
 
 .products_features_wrap {
-    width: calc(100% - 40px);
+    width: auto;
     height: 30px;
-    float: left;
+    float: right;
 }
 
 .products_features_title {
@@ -948,4 +981,37 @@ body {
     font-weight: 600;
     margin:0;
     padding:0;
+}
+.service-functional-wrap{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 35px;
+    height: 35px;
+    background-color: #ECF0F1;
+}
+.product-functional-wrap{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 35px;
+    height: 35px;
+    background-color: #ECF0F1;
+}
+.to_bookmark{
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+    margin-left: 5px;
+    background-color: white;
+    cursor: pointer;
+}
+.to_bookmark:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+.to_bookmark img{
+    width: 16px;
+    height: 16px;
+    object-fit: cover;
+    margin: 7px;
 }
