@@ -21,6 +21,10 @@ body {
     margin:0;
     padding:0;
 }
+.border {
+    width: 100%;
+    height: 1px;
+}
 .main {
     width: 100vw;
     height: 100vh;
@@ -33,6 +37,7 @@ body {
     height: 100%;
     background: rgba(44, 62, 80, 1);
     float: left;
+    position: relative;
 }
 .logo {
     width: 100%;
@@ -108,12 +113,75 @@ body {
     width: 150px;
     text-align: center;
     background-color: #3498DB;
+    position: relative;
+    cursor: pointer;
 }
-.city p {
+.city:hover {
+    background-color: rgba(52, 152, 219, 0.8);
+}
+.city-choosen-p {
     margin:0;
     color: white;
     padding: 7px;
     font-size: 14pt;
+}
+
+.city-popup {
+    position: absolute;
+    top: 100%;
+    left:0;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    padding-right: 0;
+    background-color: white;
+    z-index: 99;
+    border: 1px solid #ECF0F1;
+}
+
+.city-popup-content {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    overflow-y: auto;
+    text-align: left;
+    float: left;
+}
+
+.city-popup-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.city-popup-content::-webkit-scrollbar-track {
+    border: 0px;
+}
+
+.city-popup-content::-webkit-scrollbar-thumb {
+    background-color: rgba(44, 62, 80, 0.4);
+}
+
+.city-popup input{
+    width: calc(100% - 10px);
+    height: 25px;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+    float: left;
+}
+
+.border-city{
+    width: calc(100% - 10px);
+    background-color: #ECF0F1;
+    float: left;
+}
+
+.city-popup-content p{
+    color: #333333;
+    font-size: 12pt;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 10px;
 }
 
 .paginator_wrapp{
@@ -574,8 +642,8 @@ body {
     background-color: transparent;
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-    grid-auto-rows: 390px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-auto-rows: 420px;
 }
 
 .service {
@@ -751,7 +819,7 @@ body {
     display: table-cell;
     background-color: transparent;
     float: right;
-    width: 400px;
+    width: 30vw;
     height: calc(100vh - 40px);
 }
 .store_info_block {
@@ -1096,4 +1164,29 @@ input:checked + .slider:before {
     height: 100%;
     text-align: center;
     float: left;
+}
+
+.feedback-wrapp {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 38px;
+    height: 38px;
+    background-color: #ECF0F1;
+}
+.feedback-button {
+    width: 35px;
+    height: 35px;
+    margin-left: 3px;
+    margin-top: 3px;
+    background-color: #2C3E50;
+    padding: 5px;
+    cursor: pointer;
+}
+.feedback-button:hover {
+    background-color: rgba(44, 62, 80, 0.8);
+}
+.feedback-button img {
+    width: 100%;
+    height: 100%;
 }

@@ -29,11 +29,54 @@
                     </label>
                 </div>
             </div>
+            <div class="feedback-wrapp">
+                <div class="feedback-button">
+                    <img src="{% static 'app/img/email.svg' %}">
+                </div>
+            </div>
         </div>
         <div class="right_part">
-            <div class="top_pane">
+            <div class="top_pane" id="top_pane">
                 <input placeholder="что вы ищете?">
-                <div class="city"><p>Воронеж</p></div>
+                <div class="city" v-on:click.stop="cityChoosen()"><p class="city-choosen-p">Воронеж</p>
+                    <div class="city-popup" v-if="cityChoosenFlag" v-on:click.stop="">
+                        <input placeholder="город">
+                        <div class="border border-city"></div>
+                        <div class="city-popup-content">
+                            <p>Воронеж ВоронежВоронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                            <p>Воронеж</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="content">
                 <!--<div class="dotted"></div>-->
@@ -53,6 +96,20 @@ new Vue({
   methods: {
       changeFavoriteFlag() {
           this.favoritFlag = !this.favoritFlag
+      }
+  }
+});
+</script>
+<script>
+new Vue({
+  delimiters: ['${', '}'],
+  el: '#top_pane',
+  data: {
+      cityChoosenFlag: false
+  },
+  methods: {
+      cityChoosen() {
+          this.cityChoosenFlag = !this.cityChoosenFlag
       }
   }
 });
