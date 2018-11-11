@@ -19,7 +19,7 @@
                 <div class="main_menu_elem {% if active == 'products'%}active{% endif %}"><a href="/"><p>товары</p></a></div>
                 <div class="main_menu_elem {% if active == 'services'%}active{% endif %}"><a href="/services"><p>услуги</p></a></div>
                 <div class="main_menu_elem favorits_flag_wrap">
-                    <div class="favorits_label">
+                    <div class="favorits_label" v-on:click="changeFavoriteFlag()">
                         <p v-if="favoritFlag">все</p>
                         <p v-else>избранное</p>
                     </div>
@@ -51,6 +51,9 @@ new Vue({
       favoritFlag: false
   },
   methods: {
+      changeFavoriteFlag() {
+          this.favoritFlag = !this.favoritFlag
+      }
   }
 });
 </script>
