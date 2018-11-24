@@ -118,3 +118,19 @@ class ServiceWork(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class TagService(models.Model):
+    text = models.CharField(max_length=255)
+    service = models.ManyToManyField(Service)
+
+    def __str__(self):
+        return self.text
+
+
+class TagProduct(models.Model):
+    text = models.CharField(max_length=255)
+    product = models.ManyToManyField(Service)
+
+    def __str__(self):
+        return self.text

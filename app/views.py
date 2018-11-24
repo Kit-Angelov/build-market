@@ -33,3 +33,8 @@ def services(request):
         context = {'services': services,
                    'active': 'services'}
         return render(request, 'app/services.html', context=context)
+
+
+def about(request):
+    if request.method == 'GET':
+        return render(request, 'app/about.html')

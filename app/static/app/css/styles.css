@@ -1190,3 +1190,47 @@ input:checked + .slider:before {
     width: 100%;
     height: 100%;
 }
+
+.about_link:hover{
+    text-decoration: none;
+}
+
+.about-wrap {
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    background-color: rgba(44, 62, 80, 1);
+}
+
+.about {
+    position: absolute;
+    width: 50%;
+    height: auto;
+    top: 50vh;
+    left: 50%;
+    margin-top: -25vh;
+    margin-left: -25%;
+}
+
+.about-wrap p {
+    color: white;
+    font-size: 14pt;
+}
+
+.back-button {
+    width: 100px;
+    height: 30px;
+    float: left;
+    text-align: center;
+    background-color: #E74C3C;
+}
+.back-button p {
+    margin: 0;
+    padding: 0;
+    padding-top: 3px;
+}
+
+.back-button-link:hover {
+    text-decoration: none;
+}
