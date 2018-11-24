@@ -1,7 +1,11 @@
 from .models import TagService, TagProduct
 
 
-def tag_parser_service(service):
+def created_tags_for_service(service):
+    current_tags = service.tagservice_set.all()
+    for tag in current_tags:
+        service.tagservice_set.remove(tag)
+
     name = service.name
     works = service.servicework_set.all()
     contractor = service.contractor
@@ -27,12 +31,15 @@ def tag_parser_service(service):
         tags.append(str(name_elem).lower())
 
     for elem in tags:
-        tag_service = TagService.objects.get_or_create(text=elem)
+        tag_service, created = TagService.objects.get_or_create(text=elem)
         tag_service.service.add(service)
-        tag_service.save()
 
 
-def tag_parser_product(product):
+def created_tags_for_product(product):
+    current_tags = product.tagproduct_set.all()
+    for tag in current_tags:
+        product.tagproduct_set.remove(tag)
+
     name = product.name
     features = product.productfeature_set.all()
     store = product.store
@@ -47,14 +54,10 @@ def tag_parser_product(product):
 
     # parse features
     for feature in features:
-        feature_title = feature.title
         feature_text = feature.text
 
-        tags.append(str(feature_title).lower())
         tags.append(str(feature_text).lower())
 
-        for title_elem in str(feature_title).split():
-            tags.append(str(title_elem).lower())
         for text_elem in str(feature_text).split():
             tags.append(str(text_elem).lower())
 
@@ -64,6 +67,5 @@ def tag_parser_product(product):
         tags.append(str(name_elem).lower())
 
     for elem in tags:
-        tag_product = TagProduct.objects.get_or_create(text=elem)
+        tag_product, created = TagProduct.objects.get_or_create(text=elem)
         tag_product.service.add(product)
-        tag_product.save()
