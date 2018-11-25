@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'app/css/styles.css' %}" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>B-MARKET</title>
 </head>
 <body>
@@ -39,41 +40,13 @@
         </div>
         <div class="right_part">
             <div class="top_pane" id="top_pane">
-                <input placeholder="что вы ищете?">
+                <input placeholder="что вы ищете?" v-model="searchQuery" v-on:input="search({% if active == 'products'%}'product'{% else %}'service'{% endif %})">
                 <div class="city" v-on:click.stop="cityChoosen()"><p class="city-choosen-p">Воронеж</p>
                     <div class="city-popup" v-if="cityChoosenFlag" v-on:click.stop="">
                         <input placeholder="город">
                         <div class="border border-city"></div>
                         <div class="city-popup-content">
                             <p>Воронеж ВоронежВоронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
                             <p>Воронеж</p>
                             <p>Воронеж</p>
                         </div>
@@ -97,7 +70,7 @@ new Vue({
   },
   methods: {
       changeFavoriteFlag() {
-          this.favoritFlag = !this.favoritFlag
+          this.favoritFlag = !this.favoritFlag;
       }
   }
 });
@@ -107,9 +80,27 @@ new Vue({
   delimiters: ['${', '}'],
   el: '#top_pane',
   data: {
-      cityChoosenFlag: false
+      cityChoosenFlag: false,
+      searchQuery: ''
   },
   methods: {
+      search(method) {
+          console.log(method);
+          var url = "";
+          if (method == 'product') {
+              url = '/get_tags_products';
+          } else {
+              url = '/get_tags_services';
+          }
+          axios
+            .get(url, {
+                params: {
+                    query: this.searchQuery
+                }
+            })
+            .then(response => (console.log(response)))
+            .catch(error => console.log(error));
+      },
       cityChoosen() {
           this.cityChoosenFlag = !this.cityChoosenFlag
       }

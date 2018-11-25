@@ -151,3 +151,7 @@ class ServiceWorkRelativeAdmin(admin.StackedInline):
 @admin.register(models.Service)
 class ServiceAdmin(admin.ModelAdmin):
     inlines = [ServiceWorkRelativeAdmin, ServicePhotoRelativeAdmin]
+
+
+admin.site.register(models.TagService)
+admin.site.register(models.TagProduct)

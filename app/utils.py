@@ -68,4 +68,4 @@ def created_tags_for_product(product):
 
     for elem in tags:
         tag_product, created = TagProduct.objects.get_or_create(text=elem)
-        tag_product.service.add(product)
+        tag_product.product.add(product)

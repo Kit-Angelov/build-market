@@ -130,7 +130,7 @@ class TagService(models.Model):
 
 class TagProduct(models.Model):
     text = models.CharField(max_length=255)
-    product = models.ManyToManyField(Service)
+    product = models.ManyToManyField(Product)
 
     def __str__(self):
         return self.text

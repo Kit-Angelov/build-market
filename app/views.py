@@ -1,6 +1,8 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 from . import models
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import json
 
 
 def products(request):
@@ -38,3 +40,23 @@ def services(request):
 def about(request):
     if request.method == 'GET':
         return render(request, 'app/about.html')
+
+
+def get_tags_services(request):
+    if request.method == "GET":
+        query = request.GET.get("query")
+        if query is None:
+            return JsonResponse({"resutl": None})
+        tags = models.TagService.objects.filter(text__icontains=str(query).lower())[:5]
+        response_dict = {"result": [x for x in tags.values()]}
+        return JsonResponse(response_dict)
+
+
+def get_tags_products(request):
+    if request.method == "GET":
+        query = request.GET.get("query")
+        if query is None:
+            return JsonResponse({"resutl": None})
+        tags = models.TagProduct.objects.filter(text__icontains=str(query).lower())[:5]
+        response_dict = {"result": [x for x in tags.values()]}
+        return JsonResponse(response_dict)
