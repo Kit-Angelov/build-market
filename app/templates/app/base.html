@@ -41,6 +41,11 @@
         <div class="right_part">
             <div class="top_pane" id="top_pane">
                 <input placeholder="что вы ищете?" v-model="searchQuery" v-on:input="search({% if active == 'products'%}'product'{% else %}'service'{% endif %})">
+                <div class="search-tags-list">
+                    <div class="elem-search-tags-list" v-for="tag in tagsList">
+                        <p>${tag.text}</p>
+                    </div>
+                </div>
                 <div class="city" v-on:click.stop="cityChoosen()"><p class="city-choosen-p">Воронеж</p>
                     <div class="city-popup" v-if="cityChoosenFlag" v-on:click.stop="">
                         <input placeholder="город">
@@ -81,11 +86,15 @@ new Vue({
   el: '#top_pane',
   data: {
       cityChoosenFlag: false,
-      searchQuery: ''
+      searchQuery: '',
+      tagsList: []
   },
   methods: {
       search(method) {
-          console.log(method);
+          if (this.searchQuery.length == 0) {
+              this.tagsList = [];
+              return;
+          }
           var url = "";
           if (method == 'product') {
               url = '/get_tags_products';
@@ -98,7 +107,9 @@ new Vue({
                     query: this.searchQuery
                 }
             })
-            .then(response => (console.log(response)))
+            .then(response => (
+                this.tagsList = response.data.result
+            ))
             .catch(error => console.log(error));
       },
       cityChoosen() {
