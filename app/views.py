@@ -19,6 +19,22 @@ def products(request):
         context = {'products': products,
                    'active': 'products'}
         return render(request, 'app/products.html', context=context)
+    if request.method == 'POST':
+        search_text = request.POST.get('search_text')
+        tags = models.TagProduct.objects.filter(text__icontains=str(search_text).lower())
+        product_list = models.Product.objects.filter(tagproduct__in=tags)
+        product_set = list(set(product_list))
+        paginator = Paginator(product_set, 2)
+        page = request.GET.get('page')
+        try:
+            products = paginator.page(page)
+        except PageNotAnInteger:
+            products = paginator.page(1)
+        except EmptyPage:
+            products = paginator.page(paginator.num_pages)
+        context = {'products': products,
+                   'active': 'products'}
+        return render(request, 'app/products.html', context=context)
 
 
 def services(request):

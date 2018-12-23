@@ -40,20 +40,25 @@
         </div>
         <div class="right_part">
             <div class="top_pane" id="top_pane">
-                <input placeholder="что вы ищете?" v-model="searchQuery" v-on:input="search({% if active == 'products'%}'product'{% else %}'service'{% endif %})">
-                <div class="search-tags-list">
-                    <div class="elem-search-tags-list" v-for="tag in tagsList">
-                        <p>${tag.text}</p>
+                <div class="top_pane_content">
+                    <form class="search_form" action="" method="post">
+                        {% csrf_token %}
+                        <input class="search" name="search_text" placeholder="что вы ищете?" v-model="searchQuery" v-on:input="search({% if active == 'products'%}'product'{% else %}'service'{% endif %})">
+                    </form>
+                    <div class="search-tags-list">
+                        <div class="elem-search-tags-list" v-for="tag in tagsList">
+                            <p>${tag.text}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="city" v-on:click.stop="cityChoosen()"><p class="city-choosen-p">Воронеж</p>
-                    <div class="city-popup" v-if="cityChoosenFlag" v-on:click.stop="">
-                        <input placeholder="город">
-                        <div class="border border-city"></div>
-                        <div class="city-popup-content">
-                            <p>Воронеж ВоронежВоронеж</p>
-                            <p>Воронеж</p>
-                            <p>Воронеж</p>
+                    <div class="city" v-on:click.stop="cityChoosen()"><p class="city-choosen-p">Воронеж</p>
+                        <div class="city-popup" v-if="cityChoosenFlag" v-on:click.stop="">
+                            <input placeholder="город">
+                            <div class="border border-city"></div>
+                            <div class="city-popup-content">
+                                <p>Воронеж ВоронежВоронеж</p>
+                                <p>Воронеж</p>
+                                <p>Воронеж</p>
+                            </div>
                         </div>
                     </div>
                 </div>
